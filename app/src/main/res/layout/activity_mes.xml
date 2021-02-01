@@ -1,23 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/Drawer_Main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MesActivity">
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome to MES"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--
+        ****************************************
+        **** This is the main coordinator layout
+        ****************************************
+        -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/Layout_Coordinator_Main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--
+            ********************************************************
+            **** This is the app bar layout which contains the
+            **** main Material Toolbar.
+            ********************************************************
+            -->
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/Layout_AppBar_Main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:liftOnScroll="true"
+                tools:targetApi="p">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/Toolbar_Main"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/purple_500"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
+
+                    <TextView
+                        android:id="@+id/Toolbar_Main_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/app_name" />
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <!--
+            *****************************************************
+            **** This is the main content fragment container ****
+            *****************************************************
+            -->
+            <include layout="@layout/include_content_container_main" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <!--
+         ****************************************************
+         **** This is the Navigation View for the Drawer ****
+         ****************************************************
+         -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/Navigation_View"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:clipToPadding="false"
+            android:fitsSystemWindows="true"
+            android:paddingStart="0dp"
+            android:paddingEnd="16dp"
+            app:headerLayout="@layout/drawer_header"
+            app:menu="@menu/menu_drawer_main" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

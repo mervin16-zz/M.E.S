@@ -1,3 +1,17 @@
 <resources>
+
+
+    <!-- Application Specific -->
     <string name="app_name">MES</string>
+    <string name="app_name_long">Mauritius Emergency Services</string>
+
+
+    <!-- Menu Items -->
+    <string name="menu_drawer_emergencies">Emergencies</string>
+    <string name="menu_drawer_all_services">All Services</string>
+    <string name="menu_drawer_settings">Settings</string>
+    <string name="menu_drawer_about">About</string>
+
+    <!-- Titles -->
+    <string name="title_drawer_categories_others">OTHERS</string>
 </resources>

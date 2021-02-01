@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -48,6 +49,10 @@ dependencies {
     implementation "androidx.core:core-ktx:$android_core_version"
     implementation "androidx.constraintlayout:constraintlayout:$android_layout_constraint_version"
     implementation "com.google.android.material:material:$android_material"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$android_lifecycle"
+    implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$android_navigation"
 
     // Testing Framework Dependencies
     testImplementation "junit:junit:$testing_junit"
