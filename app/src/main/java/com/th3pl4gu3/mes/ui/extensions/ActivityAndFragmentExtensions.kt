@@ -1,4 +1,4 @@
-package com.th3pl4gu3.mes.extensions
+package com.th3pl4gu3.mes.ui.extensions
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController

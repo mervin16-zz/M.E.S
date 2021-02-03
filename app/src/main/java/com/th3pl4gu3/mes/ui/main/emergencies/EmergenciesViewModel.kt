@@ -1,4 +1,4 @@
-package com.th3pl4gu3.mes.main.emergencies
+package com.th3pl4gu3.mes.ui.main.emergencies
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

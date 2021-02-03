@@ -1,19 +1,19 @@
-package com.th3pl4gu3.mes
+package com.th3pl4gu3.mes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.ActivityMesBinding
-import com.th3pl4gu3.mes.extensions.contentView
-import com.th3pl4gu3.mes.extensions.mesToolBarConfiguration
-import com.th3pl4gu3.mes.extensions.navController
+import com.th3pl4gu3.mes.ui.extensions.contentView
+import com.th3pl4gu3.mes.ui.extensions.mesToolBarConfiguration
+import com.th3pl4gu3.mes.ui.extensions.navController
 
 class MesActivity : AppCompatActivity() {
 

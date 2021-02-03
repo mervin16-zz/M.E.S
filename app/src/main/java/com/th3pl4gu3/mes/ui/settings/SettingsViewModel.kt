@@ -1,4 +1,4 @@
-package com.th3pl4gu3.mes.settings
+package com.th3pl4gu3.mes.ui.settings
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

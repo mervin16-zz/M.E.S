@@ -11,13 +11,13 @@
     -->
     <fragment
         android:id="@+id/Fragment_Emergencies"
-        android:name="com.th3pl4gu3.mes.main.emergencies.EmergenciesFragment"
+        android:name="com.th3pl4gu3.mes.ui.main.emergencies.EmergenciesFragment"
         android:label="@string/menu_drawer_emergencies"
         tools:layout="@layout/fragment_emergencies" />
 
     <fragment
         android:id="@+id/Fragment_All_Services"
-        android:name="com.th3pl4gu3.mes.main.all_services.AllServicesFragment"
+        android:name="com.th3pl4gu3.mes.ui.main.all_services.AllServicesFragment"
         android:label="@string/menu_drawer_all_services"
         tools:layout="@layout/fragment_all_services" />
 
@@ -27,13 +27,13 @@
     -->
     <fragment
         android:id="@+id/Fragment_About"
-        android:name="com.th3pl4gu3.mes.about.AboutFragment"
+        android:name="com.th3pl4gu3.mes.ui.about.AboutFragment"
         android:label="@string/menu_drawer_about"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/Fragment_Settings"
-        android:name="com.th3pl4gu3.mes.settings.SettingsFragment"
+        android:name="com.th3pl4gu3.mes.ui.settings.SettingsFragment"
         android:label="@string/menu_drawer_settings"
         tools:layout="@layout/fragment_settings" />
 

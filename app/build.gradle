@@ -54,6 +54,14 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$android_navigation"
 
+    implementation "androidx.paging:paging-runtime-ktx:$android_paging_version"
+
+    // 3rd Party Dependencies
+    implementation "com.squareup.retrofit2:retrofit:$external_retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$external_retrofit_version"
+    implementation "com.squareup.moshi:moshi:$external_moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$external_moshi_version"
+
     // Testing Framework Dependencies
     testImplementation "junit:junit:$testing_junit"
     androidTestImplementation "androidx.test.ext:junit:$testing_android_junit"
