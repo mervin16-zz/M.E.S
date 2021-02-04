@@ -11,9 +11,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.ActivityMesBinding
-import com.th3pl4gu3.mes.ui.extensions.contentView
-import com.th3pl4gu3.mes.ui.extensions.mesToolBarConfiguration
-import com.th3pl4gu3.mes.ui.extensions.navController
+import com.th3pl4gu3.mes.ui.utils.extensions.contentView
+import com.th3pl4gu3.mes.ui.utils.extensions.mesToolBarConfiguration
+import com.th3pl4gu3.mes.ui.utils.extensions.navController
 
 class MesActivity : AppCompatActivity() {
 

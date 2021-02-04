@@ -59,8 +59,13 @@ dependencies {
     // 3rd Party Dependencies
     implementation "com.squareup.retrofit2:retrofit:$external_retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$external_retrofit_version"
+
     implementation "com.squareup.moshi:moshi:$external_moshi_version"
     implementation "com.squareup.moshi:moshi-kotlin:$external_moshi_version"
+
+    implementation "com.github.bumptech.glide:glide:$external_glide_version"
+
+    implementation "com.airbnb.android:lottie:$external_lottie_version"
 
     // Testing Framework Dependencies
     testImplementation "junit:junit:$testing_junit"

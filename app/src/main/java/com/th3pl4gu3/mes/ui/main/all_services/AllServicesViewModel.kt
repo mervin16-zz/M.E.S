@@ -13,26 +13,44 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
 
     // Private Variables
     private val mServices = MutableLiveData<List<Service>>()
+    private val mMessage = MutableLiveData<String>()
+    private val mLoading = MutableLiveData(true)
 
     // Properties
     val services: LiveData<List<Service>>
         get() = mServices
+
+    val message: LiveData<String>
+        get() = mMessage
+
+    val loading: LiveData<Boolean>
+        get() = mLoading
 
     init {
         loadServices()
     }
 
     // Functions
-    private fun loadServices() {
+    internal fun loadServices() {
+
+        // Set loading to true to
+        // notify the fragment that loading
+        // has started and to show loading animation
+        mLoading.value = true
+
         viewModelScope.launch {
             val response = ApiRepository.getInstance().getServices()
 
             if (response.success) {
                 mServices.value = response.services
             } else {
-                // Do Something
+                mMessage.value = response.message
             }
-
+        }.invokeOnCompletion {
+            // Set loading to false to
+            // notify the fragment that loading
+            // has completed and to hide loading animation
+            mLoading.value = false
         }
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--*********************************
+    ********** Main Typography **********
+    *************************************-->
+
+    <style name="Mes.Text.Title1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="Mes.Text.Title3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Mes.Text.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+</resources>

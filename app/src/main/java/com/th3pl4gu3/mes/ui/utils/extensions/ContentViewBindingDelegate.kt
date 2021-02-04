@@ -1,4 +1,4 @@
-package com.th3pl4gu3.mes.ui.extensions
+package com.th3pl4gu3.mes.ui.utils.extensions
 
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity

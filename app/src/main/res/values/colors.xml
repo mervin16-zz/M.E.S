@@ -16,6 +16,8 @@
     <color name="grey_700">#272727</color>
     <color name="grey_600">#393939</color>
 
+    <color name="grey_200">#ACACAC</color>
+
     <!-- Light grey-blue shade -->
     <color name="light_blue_grey_50">#EFF2F9</color>
 </resources>

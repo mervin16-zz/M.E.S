@@ -1,22 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="32dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/Emergency_Title"
+            style="@style/Mes.Text.Title1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Emergencies Fragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/title_emergencies_main"
+            android:textAlignment="center" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/Emergency_Subtitle"
+            style="@style/Mes.Text.Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/subtitle_emergencies_main"
+            android:textAlignment="center" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Emergency_Button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            app:icon="@drawable/ic_emergency"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="48dp"
+            app:iconTint="@color/white"
+            app:shapeAppearanceOverlay="@style/Mes.Button.Shape.Circle"
+            app:strokeColor="?attr/colorSurface"
+            app:strokeWidth="16dp" />
+
+        <TextView
+            android:id="@+id/Emergency_Other_Title"
+            style="@style/Mes.Text.Title3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/title_emergencies_otherAction"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/Emergency_Other_Subtitle"
+            style="@style/Mes.Text.Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/subtitle_emergencies_otherAction"
+            android:textAlignment="center" />
+
+    </LinearLayout>
 
 </layout>

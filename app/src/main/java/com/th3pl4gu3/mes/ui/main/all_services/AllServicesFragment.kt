@@ -10,8 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.databinding.FragmentAllServicesBinding
+import com.th3pl4gu3.mes.ui.utils.extensions.action
+import com.th3pl4gu3.mes.ui.utils.extensions.snack
+import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
 import kotlinx.coroutines.launch
 
 class AllServicesFragment : Fragment() {
@@ -29,7 +33,7 @@ class AllServicesFragment : Fragment() {
     ): View {
         mBinding = FragmentAllServicesBinding.inflate(inflater, container, false)
         mViewModel = ViewModelProvider(this).get(AllServicesViewModel::class.java)
-        // Bind lifecycle owner
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -38,6 +42,8 @@ class AllServicesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeServices()
+
+        subscribeObservers()
     }
 
     override fun onDestroyView() {
@@ -73,5 +79,17 @@ class AllServicesFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun subscribeObservers() {
+        viewModel.message.observe(viewLifecycleOwner, {
+            if (it != null) {
+                binding.RootAllServices.snackInf(it) {
+                    action(getString(R.string.action_retry)) {
+                        viewModel.loadServices()
+                    }
+                }
+            }
+        })
     }
 }

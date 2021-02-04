@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="ViewModel"
+            type="com.th3pl4gu3.mes.ui.main.all_services.AllServicesViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Root_All_Services"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,23 +23,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:visibility="@{ViewModel.loading ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
+        <com.airbnb.lottie.LottieAnimationView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All Services Fragment"
-            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/raw_anim_loading_services"
+            android:visibility="@{ViewModel.loading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!--        android:visibility="@{ViewModel.loadingStatus == List.LIST ? View.VISIBLE : View.GONE}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
