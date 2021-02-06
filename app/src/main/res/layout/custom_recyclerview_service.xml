@@ -27,6 +27,7 @@
 
             <ImageView
                 android:id="@+id/Service_Logo_Start"
+                configureLogo="@{Service.icon}"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_marginStart="16dp"
@@ -34,7 +35,6 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:scaleType="centerCrop"
-                configureLogo="@{Service.icon}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/Barrier_Logo_Start"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +50,10 @@
 
             <TextView
                 android:id="@+id/Service_Name"
+                style="@style/Mes.Text.Title.List"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:text="@{Service.name}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@id/Service_Number"
@@ -62,8 +64,10 @@
 
             <TextView
                 android:id="@+id/Service_Number"
+                style="@style/Mes.Text.Subtitle.List"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
                 android:text="@{String.valueOf(Service.number)}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/Service_Logo_Start"

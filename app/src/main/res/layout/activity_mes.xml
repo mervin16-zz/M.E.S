@@ -49,7 +49,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/app_name" />
+                        android:text="@string/app_name"
+                        style="@style/Mes.Text.Title.Screen" />
 
                 </com.google.android.material.appbar.MaterialToolbar>
 

@@ -23,4 +23,5 @@
 
     <!-- Actions -->
     <string name="action_retry">Retry</string>
+    <string name="action_search">Search</string>
 </resources>

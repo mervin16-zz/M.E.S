@@ -21,6 +21,9 @@
         <!-- Default background screen -->
         <item name="android:windowBackground">?attr/colorSurface</item>
 
+        <!-- Set the Font Family -->
+        <item name="fontFamily">@font/rubik</item>
+
         <!-- Status bar -->
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -29,6 +32,8 @@
         <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">true</item>
 
+        <!-- Hamburger Drawer Icon Style -->
+        <item name="drawerArrowStyle">@style/Mes.Drawer.Icon.Style</item>
     </style>
 
 </resources>
