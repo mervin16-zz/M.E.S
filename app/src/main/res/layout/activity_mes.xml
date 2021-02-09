@@ -82,7 +82,8 @@
             android:paddingStart="0dp"
             android:paddingEnd="16dp"
             app:headerLayout="@layout/drawer_header"
-            app:menu="@menu/menu_drawer_main" />
+            app:menu="@menu/menu_drawer_main"
+            style="@style/Mes.Drawer.NavigationView" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

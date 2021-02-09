@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentAllServicesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
+import com.th3pl4gu3.mes.ui.utils.extensions.navigateTo
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 import kotlinx.coroutines.launch
@@ -38,6 +39,8 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        subscribeViews()
 
         subscribeServices()
 
@@ -94,5 +97,12 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
                 }
             }
         })
+    }
+
+    private fun subscribeViews() {
+        // Search Box Click
+        binding.TextFieldSearch.setOnClickListener {
+            navigateTo(AllServicesFragmentDirections.actionFragmentAllServicesToFragmentSearch())
+        }
     }
 }

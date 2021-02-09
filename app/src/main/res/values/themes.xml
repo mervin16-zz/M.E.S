@@ -3,6 +3,7 @@
     <style name="Theme.MES" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
+        <item name="colorPrimaryLight">@color/red_50</item>
         <item name="colorPrimary">@color/red_400</item>
         <item name="colorPrimaryVariant">@color/red_500</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -34,6 +35,10 @@
 
         <!-- Hamburger Drawer Icon Style -->
         <item name="drawerArrowStyle">@style/Mes.Drawer.Icon.Style</item>
+
+        <!-- Line Dividers -->
+        <item name="android:listDivider">@android:color/transparent</item>
+
     </style>
 
 </resources>

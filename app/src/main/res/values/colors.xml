@@ -11,6 +11,7 @@
     <color name="red_400">#EF5350</color>
     <color name="red_300">#E57373</color>
     <color name="red_200">#EF9A9A</color>
+    <color name="red_50">#22D60020</color>
 
     <!--  Grey Color Shades  -->
     <color name="grey_700">#272727</color>
