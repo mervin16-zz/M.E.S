@@ -68,7 +68,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$external_lottie_version"
 
     // Testing Framework Dependencies
-    testImplementation "junit:junit:$testing_junit"
+    testImplementation "org.junit.jupiter:junit-jupiter:$testing_junit"
     androidTestImplementation "androidx.test.ext:junit:$testing_android_junit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testing_espresso_core"
 }

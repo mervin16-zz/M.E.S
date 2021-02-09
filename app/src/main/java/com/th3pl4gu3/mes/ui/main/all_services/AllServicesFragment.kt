@@ -8,17 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.th3pl4gu3.mes.R
-import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.databinding.FragmentAllServicesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
-import com.th3pl4gu3.mes.ui.utils.extensions.snack
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
+import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 import kotlinx.coroutines.launch
 
-class AllServicesFragment : Fragment() {
+class AllServicesFragment : Fragment(), PhoneNumberListener {
 
     private var mBinding: FragmentAllServicesBinding? = null
     private var mViewModel: AllServicesViewModel? = null
@@ -51,9 +49,14 @@ class AllServicesFragment : Fragment() {
         mBinding = null
     }
 
+    override fun onPhoneNumberClicked(number: Long) {
+        Log.v("NUMBER_CLICK_TEST", number.toString())
+        TODO("Implement phone intent")
+    }
+
     // Private Functions
     private fun subscribeServices() {
-        val adapter = ServiceAdapter()
+        val adapter = ServiceAdapter(this)
 
         binding.RecyclerViewServices.apply {
             /*

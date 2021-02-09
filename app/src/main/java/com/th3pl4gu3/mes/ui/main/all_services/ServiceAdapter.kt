@@ -1,11 +1,15 @@
 package com.th3pl4gu3.mes.ui.main.all_services
 
+
 import com.th3pl4gu3.mes.api.Service
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 
-class ServiceAdapter : ListAdapter<Service, ServiceViewHolder>(
+class ServiceAdapter(
+    private val phoneNumberListener: PhoneNumberListener
+) : ListAdapter<Service, ServiceViewHolder>(
     diffCallback
 ) {
     companion object {
@@ -22,6 +26,7 @@ class ServiceAdapter : ListAdapter<Service, ServiceViewHolder>(
 
     override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
         holder.bind(
+            phoneNumberListener,
             getItem(position)
         )
     }

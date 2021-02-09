@@ -37,7 +37,7 @@ buildscript {
         external_lottie_version = "3.4.0"
 
         // Testing Frameworks Versions
-        testing_junit = "4.13.1"
+        testing_junit = "5.6.2"
         testing_android_junit = "1.1.2"
         testing_espresso_core = "3.3.0"
     }

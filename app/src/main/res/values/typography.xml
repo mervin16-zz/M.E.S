@@ -57,6 +57,6 @@
     </style>
 
     <style name="Mes.Text.Subtitle.List" parent="Mes.Text.Subtitle2">
-        <item name="android:letterSpacing">0.2</item>
+        <item name="android:letterSpacing">0.1</item>
     </style>
 </resources>

@@ -9,9 +9,15 @@
         <variable
             name="Service"
             type="com.th3pl4gu3.mes.api.Service" />
+
+        <variable
+            name="PhoneNumberListener"
+            type="com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/Root_Card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,7 +25,8 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="?attr/colorPrimarySurface">
+        app:cardBackgroundColor="?attr/colorPrimarySurface"
+        android:onClick="@{() -> PhoneNumberListener.onPhoneNumberClicked(Service.number)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -68,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="@{String.valueOf(Service.number)}"
+                toMurPhoneNumberStringFormat="@{Service.number}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/Service_Logo_Start"
                 app:layout_constraintStart_toStartOf="@id/Service_Name"
