@@ -3,72 +3,96 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="32dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/Emergency_Title"
-            style="@style/Mes.Text.Title1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/title_emergencies_main"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Emergency_Subtitle"
-            style="@style/Mes.Text.Subtitle1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/subtitle_emergencies_main"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/Emergency_Title"
+                style="@style/Mes.Text.Title1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/title_emergencies_main"
+                android:textAlignment="center" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/Emergency_Button"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:padding="0dp"
-            app:icon="@drawable/ic_emergency"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="48dp"
-            app:iconTint="@color/white"
-            app:shapeAppearanceOverlay="@style/Mes.Button.Shape.Circle"
-            app:strokeColor="?attr/colorSurface"
-            app:strokeWidth="16dp" />
+            <TextView
+                android:id="@+id/Emergency_Subtitle"
+                style="@style/Mes.Text.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/subtitle_emergencies_main"
+                android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/Emergency_Other_Title"
-            style="@style/Mes.Text.Title3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/title_emergencies_otherAction"
-            android:textAlignment="center" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Emergency_Button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:icon="@drawable/ic_emergency"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp"
+                app:iconTint="@color/white"
+                app:shapeAppearanceOverlay="@style/Mes.Button.Shape.Circle"
+                app:strokeColor="?attr/colorSurface"
+                app:strokeWidth="16dp" />
 
-        <TextView
-            android:id="@+id/Emergency_Other_Subtitle"
-            style="@style/Mes.Text.Subtitle1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/subtitle_emergencies_otherAction"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/Emergency_Other_Title"
+                style="@style/Mes.Text.Title3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/title_emergencies_otherAction"
+                android:textAlignment="center" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/Emergency_Other_Subtitle"
+                style="@style/Mes.Text.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/subtitle_emergencies_otherAction"
+                android:textAlignment="center" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerView_Emergencies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="horizontal" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

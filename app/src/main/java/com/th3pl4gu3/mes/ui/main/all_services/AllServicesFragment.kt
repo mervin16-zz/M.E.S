@@ -51,7 +51,7 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
 
     override fun onPhoneNumberClicked(number: Long) {
         Log.v("NUMBER_CLICK_TEST", number.toString())
-        TODO("Implement phone intent")
+        // TODO("Implement phone intent")
     }
 
     // Private Functions
