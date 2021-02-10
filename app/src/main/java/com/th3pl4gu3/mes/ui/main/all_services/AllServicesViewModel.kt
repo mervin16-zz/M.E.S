@@ -1,13 +1,12 @@
 package com.th3pl4gu3.mes.ui.main.all_services
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.th3pl4gu3.mes.api.ApiRepository
 import com.th3pl4gu3.mes.api.Service
+import com.th3pl4gu3.mes.ui.utils.extensions.lowercase
 import kotlinx.coroutines.launch
+import kotlin.collections.ArrayList
 
 class AllServicesViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -15,16 +14,29 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
     private val mServices = MutableLiveData<List<Service>>()
     private val mMessage = MutableLiveData<String>()
     private val mLoading = MutableLiveData(true)
+    private var mSearchQuery = MutableLiveData<String>()
+    private var mRawServices = ArrayList<Service>()
 
     // Properties
-    val services: LiveData<List<Service>>
-        get() = mServices
-
     val message: LiveData<String>
         get() = mMessage
 
     val loading: LiveData<Boolean>
         get() = mLoading
+
+    val services: LiveData<List<Service>> = Transformations.switchMap(mSearchQuery) { query ->
+        if (query.isEmpty()) {
+            mServices.value = mRawServices
+        } else {
+            mServices.value = mRawServices.filter {
+                it.name.lowercase().contains(query.lowercase()) ||
+                        it.identifier.lowercase().contains(query.lowercase()) ||
+                        it.type.lowercase().contains(query.lowercase())
+            }
+        }
+
+        mServices
+    }
 
     init {
         loadServices()
@@ -42,7 +54,11 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
             val response = ApiRepository.getInstance().getServices()
 
             if (response.success) {
-                mServices.value = response.services
+                // Bind raw services
+                mRawServices = ArrayList(response.services)
+
+                // Set the default search string
+                mSearchQuery.value = ""
             } else {
                 mMessage.value = response.message
             }
@@ -52,5 +68,9 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
             // has completed and to hide loading animation
             mLoading.value = false
         }
+    }
+
+    internal fun search(query: String) {
+        mSearchQuery.value = query
     }
 }

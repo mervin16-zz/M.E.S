@@ -20,9 +20,6 @@
         android:name="com.th3pl4gu3.mes.ui.main.all_services.AllServicesFragment"
         android:label="@string/menu_drawer_all_services"
         tools:layout="@layout/fragment_all_services">
-        <action
-            android:id="@+id/action_Fragment_All_Services_to_Fragment_Search"
-            app:destination="@id/Fragment_Search" />
     </fragment>
 
     <!--
@@ -40,15 +37,5 @@
         android:name="com.th3pl4gu3.mes.ui.settings.SettingsFragment"
         android:label="@string/menu_drawer_settings"
         tools:layout="@layout/fragment_settings" />
-
-
-    <!--
-        Search Fragment
-    -->
-    <fragment
-        android:id="@+id/Fragment_Search"
-        android:name="com.th3pl4gu3.mes.ui.search.SearchFragment"
-        android:label="Search a Service"
-        tools:layout="@layout/fragment_search" />
 
 </navigation>

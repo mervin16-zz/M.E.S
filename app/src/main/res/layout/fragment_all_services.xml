@@ -36,16 +36,15 @@
                     android:visibility="@{ViewModel.loading ? View.GONE : View.VISIBLE}"
                     app:constraint_referenced_ids="TextField_Search,RecyclerView_Services" />
 
-                <TextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextField_Search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:background="@drawable/custom_rounded_background_searchtextview"
                     android:drawablePadding="-24dp"
-                    android:gravity="center"
+                    android:hint="@string/action_search"
                     android:padding="24dp"
-                    android:text="@string/action_search"
                     android:textAlignment="center"
                     android:textAppearance="@style/Mes.Text.Subtitle1"
                     app:drawableStartCompat="@drawable/ic_search"

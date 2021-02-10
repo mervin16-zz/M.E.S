@@ -1,6 +1,8 @@
 package com.th3pl4gu3.mes.ui.main.all_services
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +41,6 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        subscribeViews()
 
         subscribeServices()
 
@@ -97,12 +97,19 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
                 }
             }
         })
-    }
 
-    private fun subscribeViews() {
-        // Search Box Click
-        binding.TextFieldSearch.setOnClickListener {
-            navigateTo(AllServicesFragmentDirections.actionFragmentAllServicesToFragmentSearch())
-        }
+        binding.TextFieldSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                return
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.search(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                return
+            }
+        })
     }
 }
