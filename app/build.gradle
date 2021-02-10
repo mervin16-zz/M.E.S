@@ -48,11 +48,12 @@ dependencies {
     // Android Dependencies
     implementation "androidx.core:core-ktx:$android_core_version"
     implementation "androidx.constraintlayout:constraintlayout:$android_layout_constraint_version"
-    implementation "com.google.android.material:material:$android_material"
+    implementation "com.google.android.material:material:$android_material_version"
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$android_lifecycle"
-    implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$android_navigation"
+    implementation "androidx.lifecycle:lifecycle-extensions:$android_lifecycle_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$android_navigation_version"
+    implementation "androidx.preference:preference:$android_preference_version"
 
     implementation "androidx.paging:paging-runtime-ktx:$android_paging_version"
 
@@ -66,6 +67,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$external_glide_version"
 
     implementation "com.airbnb.android:lottie:$external_lottie_version"
+
+    implementation "com.google.code.gson:gson:$external_gson_version"
 
     // Testing Framework Dependencies
     testImplementation "org.junit.jupiter:junit-jupiter:$testing_junit"

@@ -9,11 +9,15 @@
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_blue_grey_50</item>
+        <item name="colorSecondary">@color/red_400</item>
         <item name="colorOnSecondary">@color/grey_200</item>
 
+        <!-- Screen brand color. -->
+        <item name="colorScreenSurface">@color/light_blue_grey_50</item>
+        <item name="colorOnScreenSurface">@color/grey_200</item>
+
         <!-- Surface Brand Color -->
-        <item name="colorSurface">?attr/colorSecondary</item>
+        <item name="colorSurface">?attr/colorScreenSurface</item>
         <item name="colorOnSurface">@color/grey_600</item>
 
         <!-- Primary Surface -->
@@ -38,6 +42,9 @@
 
         <!-- Line Dividers -->
         <item name="android:listDivider">@android:color/transparent</item>
+
+        <!-- Settings Preferences Theme -->
+        <item name="preferenceTheme">@style/Mes.Theme.Preference</item>
 
     </style>
 

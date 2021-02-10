@@ -12,4 +12,10 @@
     <style name="Mes.Drawer.NavigationView" parent="Widget.Design.NavigationView">
         <item name="itemBackground">@drawable/custom_selector_state_drawer_item</item>
     </style>
+
+    <!-- Settings Preferences -->
+    <style name="Mes.Theme.Preference" parent="PreferenceThemeOverlay">
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+    </style>
 </resources>

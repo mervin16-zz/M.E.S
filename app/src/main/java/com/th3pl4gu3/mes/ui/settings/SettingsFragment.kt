@@ -1,31 +1,46 @@
 package com.th3pl4gu3.mes.ui.settings
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.th3pl4gu3.mes.databinding.FragmentSettingsBinding
+import androidx.preference.ListPreference
+import androidx.preference.PreferenceFragmentCompat
+import com.th3pl4gu3.mes.R
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
-    private var mBinding: FragmentSettingsBinding? = null
     private var mViewModel: SettingsViewModel? = null
 
-    private val binding get() = mBinding!!
     private val viewModel get() = mViewModel!!
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        mBinding = FragmentSettingsBinding.inflate(inflater, container, false)
-        mViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-        // Bind lifecycle owner
-        binding.lifecycleOwner = this
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        return binding.root
+        // Initiate View Model
+        mViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+
+    }
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        /*
+        * The actual xml file that represents the
+        * settings screen
+        */
+        setPreferencesFromResource(R.xml.xml_settings_main, rootKey)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Preferences Listeners
+        appThemePreference()
+    }
+
+    // Preferences
+    private fun appThemePreference() {
+        findPreference<ListPreference>(getString(R.string.settings_key_display_theme))?.setOnPreferenceChangeListener { preference, newValue ->
+            viewModel.updateAppTheme(preference.key, newValue as String)
+            true
+        }
     }
 }

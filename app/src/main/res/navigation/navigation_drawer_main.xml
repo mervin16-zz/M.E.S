@@ -35,7 +35,6 @@
     <fragment
         android:id="@+id/Fragment_Settings"
         android:name="com.th3pl4gu3.mes.ui.settings.SettingsFragment"
-        android:label="@string/menu_drawer_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:label="@string/menu_drawer_settings" />
 
 </navigation>

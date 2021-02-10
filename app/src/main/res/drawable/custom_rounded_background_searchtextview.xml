@@ -3,7 +3,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke
         android:width="5dp"
-        android:color="?attr/colorSecondary" />
+        android:color="?attr/colorScreenSurface" />
 
     <solid android:color="?attr/colorPrimarySurface" />
 
