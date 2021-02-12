@@ -35,6 +35,8 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="Mes.Text.Caption" parent="TextAppearance.MaterialComponents.Caption" />
+
 
     <!--*********************************
     *********** MES Typography **********
@@ -58,5 +60,23 @@
 
     <style name="Mes.Text.Subtitle.List" parent="Mes.Text.Subtitle2">
         <item name="android:letterSpacing">0.1</item>
+    </style>
+
+
+    <style name="Mes.Text.Caption.Card" />
+
+    <style name="Mes.Text.Caption.Card.About">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="Mes.Text.Title.List.AboutItem">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Mes.Text.Subtitle.List.AboutItem">
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

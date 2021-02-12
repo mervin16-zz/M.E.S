@@ -45,4 +45,27 @@
     <string name="settings_key_help_add_services" translatable="false">settings_key_help_add_services</string>
     <string name="settings_title_help_add_services">Suggest New Service</string>
     <string name="settings_summary_help_add_services">Send propositions for services not listed on MES</string>
+
+
+    <!-- About -->
+    <string name="text_subtitle_about_sections_dev">Support &amp; Development</string>
+    <string name="text_subtitle_about_sections_other">Other</string>
+
+    <string name="text_title_about_dev_rate">Rate MES</string>
+    <string name="text_title_about_dev_bug">Report a Bug</string>
+    <string name="text_title_about_dev_suggestion">Suggest a Missing Service</string>
+    <string name="text_title_about_dev_share">Share MES</string>
+
+    <string name="text_description_about_dev_rate">If you love the app, let us know in the Google Play Store and we can make it even better</string>
+    <string name="text_description_about_dev_suggestion">Send propositions for services not listed on MES</string>
+    <string name="text_description_about_dev_bug">Any error that is persisting in the app, please send an email by clicking here</string>
+    <string name="text_description_about_dev_share">Do not forget to share the app with your friends and family</string>
+
+    <string name="text_title_about_other_license">Open Source Licenses</string>
+    <string name="text_title_about_other_terms">Terms &amp; Privacy Policy</string>
+    <string name="text_title_about_other_version">Version</string>
+    <string name="text_title_about_other_developer">Developer API</string>
+
+    <string name="text_description_about_other_developer">Application Program Interface (API) used in MES</string>
+
 </resources>

@@ -24,15 +24,15 @@
         app:title="@string/settings_title_category_help">
 
         <Preference
-            app:key="@string/settings_key_help_feedback"
-            app:summary="@string/settings_summary_help_feedback"
-            app:title="@string/settings_title_help_feedback"
-            app:icon="@drawable/ic_feedback" />
-
-        <Preference
             app:key="@string/settings_key_help_add_services"
             app:summary="@string/settings_summary_help_add_services"
             app:title="@string/settings_title_help_add_services"
+            app:icon="@drawable/ic_suggestion" />
+
+        <Preference
+            app:key="@string/settings_key_help_feedback"
+            app:summary="@string/settings_summary_help_feedback"
+            app:title="@string/settings_title_help_feedback"
             app:icon="@drawable/ic_feedback" />
 
     </PreferenceCategory>
