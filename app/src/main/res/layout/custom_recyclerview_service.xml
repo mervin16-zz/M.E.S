@@ -18,6 +18,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/Root_Card"
+        style="@style/Mes.CardView.Default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -25,7 +26,6 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="?attr/colorPrimarySurface"
         android:onClick="@{() -> PhoneNumberListener.onPhoneNumberClicked(Service.number)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,12 +57,11 @@
 
             <TextView
                 android:id="@+id/Service_Name"
-                style="@style/Mes.Text.Title.List"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="@{Service.name}"
-                android:textColor="@color/black"
+                android:textAppearance="@style/Mes.Text.Title.List"
                 app:layout_constraintBottom_toTopOf="@id/Service_Number"
                 app:layout_constraintStart_toEndOf="@+id/Barrier_Logo_Start"
                 app:layout_constraintTop_toTopOf="@+id/Service_Logo_Start"
@@ -71,12 +70,11 @@
 
             <TextView
                 android:id="@+id/Service_Number"
-                style="@style/Mes.Text.Subtitle.List"
+                toMurPhoneNumberStringFormat="@{Service.number}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                toMurPhoneNumberStringFormat="@{Service.number}"
-                android:textColor="@color/black"
+                android:textAppearance="@style/Mes.Text.Subtitle.List"
                 app:layout_constraintBottom_toBottomOf="@+id/Service_Logo_Start"
                 app:layout_constraintStart_toStartOf="@id/Service_Name"
                 app:layout_constraintTop_toBottomOf="@id/Service_Name"

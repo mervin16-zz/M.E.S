@@ -38,17 +38,13 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextField_Search"
+                    style="@style/Mes.TextField.Search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:background="@drawable/custom_rounded_background_searchtextview"
                     android:drawablePadding="-24dp"
                     android:hint="@string/action_search"
                     android:padding="24dp"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/Mes.Text.Subtitle1"
-                    app:drawableStartCompat="@drawable/ic_search"
-                    app:drawableTint="?attr/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

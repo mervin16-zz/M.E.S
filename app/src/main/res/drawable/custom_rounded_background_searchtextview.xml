@@ -5,7 +5,7 @@
         android:width="5dp"
         android:color="?attr/colorScreenSurface" />
 
-    <solid android:color="?attr/colorPrimarySurface" />
+    <solid android:color="?attr/colorSurface" />
 
     <corners android:radius="50dp" />
 </shape>

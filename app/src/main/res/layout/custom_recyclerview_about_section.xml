@@ -32,11 +32,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
-            app:tint="?attr/colorPrimary"
             app:layout_constraintBottom_toTopOf="@id/Barrier_Icon_Horizontal"
             app:layout_constraintEnd_toStartOf="@id/Barrier_Icon_Vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorPrimary"
             tools:src="@drawable/ic_phone" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -48,11 +48,11 @@
 
         <TextView
             android:id="@+id/Title"
-            style="@style/Mes.Text.Title.List"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{AboutItem.title}"
+            android:textAppearance="@style/Mes.Text.Title.List"
             app:layout_constraintBottom_toBottomOf="@+id/Icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -70,11 +70,11 @@
 
         <TextView
             android:id="@+id/Description"
-            style="@style/Mes.Text.Subtitle.List"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@{AboutItem.description}"
+            android:textAppearance="@style/Mes.Text.Subtitle.List"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/Title"

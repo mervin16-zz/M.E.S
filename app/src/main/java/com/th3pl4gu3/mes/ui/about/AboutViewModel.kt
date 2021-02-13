@@ -22,6 +22,14 @@ class AboutViewModel(application: Application) : AndroidViewModel(application) {
         )
         add(
             AboutItem(
+                getString(R.string.text_title_about_dev_share),
+                getString(R.string.text_description_about_dev_share),
+                R.drawable.ic_share,
+                AboutItem.Item.DEV_SHARE
+            )
+        )
+        add(
+            AboutItem(
                 getString(R.string.text_title_about_dev_suggestion),
                 getString(R.string.text_description_about_dev_suggestion),
                 R.drawable.ic_suggestion,
@@ -34,15 +42,6 @@ class AboutViewModel(application: Application) : AndroidViewModel(application) {
                 getString(R.string.text_description_about_dev_bug),
                 R.drawable.ic_bug_report,
                 AboutItem.Item.DEV_REPORT_BUG
-            )
-        )
-
-        add(
-            AboutItem(
-                getString(R.string.text_title_about_dev_share),
-                getString(R.string.text_description_about_dev_share),
-                R.drawable.ic_share,
-                AboutItem.Item.DEV_SHARE
             )
         )
     }

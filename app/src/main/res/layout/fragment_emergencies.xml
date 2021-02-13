@@ -14,7 +14,7 @@
 
             <TextView
                 android:id="@+id/Emergency_Title"
-                style="@style/Mes.Text.Title1"
+                android:textAppearance="@style/Mes.Text.Title1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
 
             <TextView
                 android:id="@+id/Emergency_Subtitle"
-                style="@style/Mes.Text.Subtitle1"
+                android:textAppearance="@style/Mes.Text.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -37,7 +37,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Emergency_Button"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                style="@style/Mes.Button.Emergency"
                 android:layout_width="220dp"
                 android:layout_height="220dp"
                 android:layout_gravity="center"
@@ -45,24 +45,15 @@
                 android:layout_marginBottom="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:backgroundTint="?attr/colorPrimary"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
-                android:padding="0dp"
-                app:icon="@drawable/ic_emergency"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconSize="48dp"
-                app:iconTint="@color/white"
-                app:shapeAppearanceOverlay="@style/Mes.Button.Shape.Circle"
-                app:strokeColor="?attr/colorSurface"
-                app:strokeWidth="16dp" />
+                android:padding="0dp" />
 
             <TextView
                 android:id="@+id/Emergency_Other_Title"
-                style="@style/Mes.Text.Title3"
+                android:textAppearance="@style/Mes.Text.Title3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -74,7 +65,7 @@
 
             <TextView
                 android:id="@+id/Emergency_Other_Subtitle"
-                style="@style/Mes.Text.Subtitle1"
+                android:textAppearance="@style/Mes.Text.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
