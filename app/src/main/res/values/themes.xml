@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.MES" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    <!-- ======================== -->
+    <!-- Application's Base Theme -->
+    <!-- ======================== -->
+    <style name="Mes.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
         <item name="colorPrimaryLight">@color/red_50</item>
@@ -43,6 +47,13 @@
         <!-- Settings Preferences Theme -->
         <item name="preferenceTheme">@style/Mes.Theme.Preference</item>
 
+    </style>
+
+    <!-- ====================== -->
+    <!-- Splash Launcher Theme -->
+    <!-- ====================== -->
+    <style name="Mes.Theme.Launcher">
+        <item name="android:windowBackground">@drawable/custom_launcher_loading</item>
     </style>
 
 </resources>

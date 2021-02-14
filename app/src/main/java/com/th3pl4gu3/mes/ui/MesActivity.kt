@@ -33,6 +33,8 @@ class MesActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        /* Re set the style to the main theme app */
+        setTheme(R.style.Mes_Theme)
         super.onCreate(savedInstanceState)
 
         // Custom toolbar configuration

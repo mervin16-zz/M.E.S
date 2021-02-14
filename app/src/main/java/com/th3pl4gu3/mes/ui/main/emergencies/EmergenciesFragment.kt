@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.databinding.FragmentEmergenciesBinding
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
-import kotlinx.coroutines.launch
 
 class EmergenciesFragment : Fragment(), PhoneNumberListener {
 
@@ -121,6 +118,8 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
             this.adapter = adapter
         }
 
-        adapter.submitList(list)
+        adapter.submitList(
+            list
+        )
     }
 }

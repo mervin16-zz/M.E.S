@@ -11,6 +11,7 @@ import retrofit2.http.GET
 * Current service API configured: [MES by Th3pl4gu3]
 */
 private const val BASE_URL = "https://mes.th3pl4gu3.com/"
+private const val VERSION = "v0.2"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -22,7 +23,7 @@ private val retrofitService = Retrofit.Builder()
     .build()
 
 interface ApiService {
-    @GET("/en/services")
+    @GET("/${VERSION}/en/services")
     suspend fun getProperties(): Response
 }
 

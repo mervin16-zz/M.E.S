@@ -13,7 +13,13 @@
         android:id="@+id/Fragment_Emergencies"
         android:name="com.th3pl4gu3.mes.ui.main.emergencies.EmergenciesFragment"
         android:label="@string/menu_drawer_emergencies"
-        tools:layout="@layout/fragment_emergencies" />
+        tools:layout="@layout/fragment_emergencies">
+        <argument
+            android:name="LIST_SERVICES"
+            app:argType="com.th3pl4gu3.mes.api.Service[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/Fragment_All_Services"

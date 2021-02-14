@@ -1,11 +1,9 @@
 package com.th3pl4gu3.mes.ui.about
 
 import android.app.Application
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import com.th3pl4gu3.mes.BuildConfig
 import com.th3pl4gu3.mes.R
-import com.th3pl4gu3.mes.ui.utils.extensions.applicationContext
 import com.th3pl4gu3.mes.ui.utils.extensions.getString
 
 class AboutViewModel(application: Application) : AndroidViewModel(application) {
