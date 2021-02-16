@@ -58,4 +58,14 @@
         <item name="strokeWidth">16dp</item>
         <item name="android:backgroundTint">?attr/colorPrimary</item>
     </style>
+
+    <!-- Progress Indicators Styles-->
+    <style name="Mes.ProgressIndicators.Default" parent="Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="materialThemeOverlay">@style/Mes.ProgressIndicators.ThemeOverlay.Default</item>
+        <item name="trackThickness">20dp</item>
+    </style>
+
+    <style name="Mes.ProgressIndicators.ThemeOverlay.Default" parent="">
+        <item name="colorPrimary">?attr/colorPrimaryLight</item>
+    </style>
 </resources>

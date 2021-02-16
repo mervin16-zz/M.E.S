@@ -53,7 +53,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$android_lifecycle_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$android_navigation_version"
-    implementation "androidx.preference:preference:$android_preference_version"
+    implementation "androidx.preference:preference-ktx:$android_preference_version"
 
     implementation "androidx.paging:paging-runtime-ktx:$android_paging_version"
 

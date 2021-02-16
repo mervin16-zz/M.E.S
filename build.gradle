@@ -25,7 +25,7 @@ buildscript {
         // Android Versions
         android_core_version = "1.3.2"
         android_layout_constraint_version = "2.0.4"
-        android_material_version = "1.2.1"
+        android_material_version = "1.3.0"
         android_lifecycle_version = "2.2.0"
         android_navigation_version = "2.3.0"
         android_paging_version = "2.1.2"

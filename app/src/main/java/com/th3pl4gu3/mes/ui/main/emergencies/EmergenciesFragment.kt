@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.th3pl4gu3.mes.api.Service
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentEmergenciesBinding
+import com.th3pl4gu3.mes.ui.utils.extensions.action
+import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
+import kotlinx.coroutines.launch
 
 class EmergenciesFragment : Fragment(), PhoneNumberListener {
 
@@ -27,6 +31,7 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
     ): View {
         mBinding = FragmentEmergenciesBinding.inflate(inflater, container, false)
         mViewModel = ViewModelProvider(this).get(EmergenciesViewModel::class.java)
+        binding.viewModel = viewModel
         // Bind lifecycle owner
         binding.lifecycleOwner = this
 
@@ -39,6 +44,8 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
         subscribeButtons()
 
         subscribeEmergencies()
+
+        subscribeObservers()
     }
 
     override fun onDestroyView() {
@@ -55,53 +62,17 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
     private fun subscribeButtons() {
         // Emergency Button
         binding.EmergencyButton.setOnLongClickListener {
-            Log.v("NUMBER_CLICK_TEST", "999")
+
+            val emergencyButtonHolder = viewModel.emergencyButtonHolder
+
+            Log.v("NUMBER_CLICK_TEST", emergencyButtonHolder?.number.toString())
+
             true
             // TODO("Implement phone intent")
         }
     }
 
     private fun subscribeEmergencies() {
-        // TODO("Replace fake list with real list)
-        val list = ArrayList<Service>().apply {
-            add(
-                Service(
-                    "1",
-                    "Hospital",
-                    "HEALTH",
-                    "https://img.icons8.com/fluent/100/000000/policeman-male.png",
-                    111
-                )
-            )
-            add(
-                Service(
-                    "2",
-                    "Emergency Police",
-                    "SECURITY",
-                    "https://img.icons8.com/fluent/100/000000/policeman-male.png",
-                    222
-                )
-            )
-            add(
-                Service(
-                    "3",
-                    "SAMU",
-                    "HEALTH",
-                    "https://img.icons8.com/fluent/100/000000/policeman-male.png",
-                    333
-                )
-            )
-            add(
-                Service(
-                    "4",
-                    "Fire Extinguishers",
-                    "SECURITY",
-                    "https://img.icons8.com/fluent/100/000000/policeman-male.png",
-                    444
-                )
-            )
-        }
-
         val adapter = EmergencyAdapter(this)
 
         binding.RecyclerViewEmergencies.apply {
@@ -118,8 +89,27 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
             this.adapter = adapter
         }
 
-        adapter.submitList(
-            list
-        )
+        viewModel.emergencies.observe(viewLifecycleOwner, { emergencies ->
+            lifecycleScope.launch {
+
+                // Load emergency list
+                adapter.submitList(emergencies)
+
+                // Rebind adapter
+                binding.RecyclerViewEmergencies.adapter = adapter
+            }
+        })
+    }
+
+    private fun subscribeObservers() {
+        viewModel.message.observe(viewLifecycleOwner, { error ->
+            if (error != null) {
+                binding.RootEmergencies.snackInf(error) {
+                    action(getString(R.string.action_retry)) {
+                        viewModel.loadServices()
+                    }
+                }
+            }
+        })
     }
 }

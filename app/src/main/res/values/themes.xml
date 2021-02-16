@@ -47,6 +47,9 @@
         <!-- Settings Preferences Theme -->
         <item name="preferenceTheme">@style/Mes.Theme.Preference</item>
 
+        <!-- Progress Bar Style -->
+        <item name="circularProgressIndicatorStyle">@style/Mes.ProgressIndicators.Default</item>
+
     </style>
 
     <!-- ====================== -->

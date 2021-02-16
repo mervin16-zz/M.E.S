@@ -5,6 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 /*
 * Retrofit API service to fetch service details from API
@@ -13,18 +14,21 @@ import retrofit2.http.GET
 private const val BASE_URL = "https://mes.th3pl4gu3.com/"
 private const val VERSION = "v0.2"
 
-private val moshi = Moshi.Builder()
+private val mMoshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
 private val retrofitService = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addConverterFactory(MoshiConverterFactory.create(mMoshi))
     .baseUrl(BASE_URL)
     .build()
 
 interface ApiService {
-    @GET("/${VERSION}/en/services")
-    suspend fun getProperties(): Response
+    @GET("/${VERSION}/en/services?")
+    suspend fun getServices(@Query("order") order: String): Response
+
+    @GET("/${VERSION}/en/services/emergencies?")
+    suspend fun getEmergencies(@Query("order") order: String): Response
 }
 
 object RetrofitManager {

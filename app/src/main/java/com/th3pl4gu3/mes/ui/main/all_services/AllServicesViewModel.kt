@@ -49,8 +49,12 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
         // notify the fragment that loading
         // has started and to show loading animation
         mLoading.value = true
+        // Reset previous Message value
+        mMessage.value = null
 
         viewModelScope.launch {
+            //TODO("Ensure connected to internet first")
+
             val response = ApiRepository.getInstance().getServices()
 
             if (response.success) {
@@ -59,6 +63,7 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
 
                 // Set the default search string
                 mSearchQuery.value = ""
+
             } else {
                 mMessage.value = response.message
             }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -111,5 +112,12 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
                 return
             }
         })
+
+        binding.TextFieldSearch.setOnEditorActionListener { v, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                binding.TextFieldSearch.clearFocus()
+            }
+            false
+        }
     }
 }
