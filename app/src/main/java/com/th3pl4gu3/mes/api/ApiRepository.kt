@@ -9,8 +9,6 @@ class ApiRepository private constructor() {
         RetrofitManager.retrofit
 
     companion object {
-        private const val ORDER_TYPE = "asc"
-
         @Volatile
         private var INSTANCE: ApiRepository? = null
 
@@ -22,7 +20,7 @@ class ApiRepository private constructor() {
             }
     }
 
-    suspend fun getServices() = apiService.getServices(ORDER_TYPE)
+    suspend fun getServices() = apiService.getServices(API_ORDER_TYPE)
 
-    suspend fun getEmergencies() = apiService.getEmergencies(ORDER_TYPE)
+    suspend fun getEmergencies() = apiService.getEmergencies(API_ORDER_TYPE)
 }

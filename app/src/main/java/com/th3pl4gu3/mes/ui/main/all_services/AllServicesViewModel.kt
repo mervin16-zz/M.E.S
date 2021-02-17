@@ -2,10 +2,14 @@ package com.th3pl4gu3.mes.ui.main.all_services
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.ApiRepository
 import com.th3pl4gu3.mes.api.Service
+import com.th3pl4gu3.mes.ui.utils.Global
+import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import com.th3pl4gu3.mes.ui.utils.extensions.lowercase
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 class AllServicesViewModel(application: Application) : AndroidViewModel(application) {
@@ -53,20 +57,30 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
         mMessage.value = null
 
         viewModelScope.launch {
-            //TODO("Ensure connected to internet first")
 
-            val response = ApiRepository.getInstance().getServices()
+            try {
+                if (Global.isNetworkConnected) {
 
-            if (response.success) {
-                // Bind raw services
-                mRawServices = ArrayList(response.services)
+                    with(ApiRepository.getInstance().getServices()) {
+                        if (success) {
+                            // Bind raw services
+                            mRawServices = ArrayList(services)
 
-                // Set the default search string
-                mSearchQuery.value = ""
+                            // Set the default search string
+                            mSearchQuery.value = ""
 
-            } else {
-                mMessage.value = response.message
+                        } else {
+                            mMessage.value = message
+                        }
+                    }
+
+                } else {
+                    mMessage.value = getString(R.string.message_info_no_internet)
+                }
+            } catch (e: Exception) {
+                mMessage.value = getString(R.string.message_error_bug_report)
             }
+
         }.invokeOnCompletion {
             // Set loading to false to
             // notify the fragment that loading

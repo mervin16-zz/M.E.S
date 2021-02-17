@@ -1,6 +1,5 @@
 <resources>
 
-
     <!-- Application Specific -->
     <string name="app_name">MES</string>
     <string name="app_name_long">Mauritius Emergency Services</string>
@@ -68,4 +67,13 @@
 
     <string name="text_description_about_other_developer">Application Program Interface (API) used in MES</string>
 
+
+    <!-- Messages -->
+    <string name="message_info_no_internet">You\'re not connected to the internet</string>
+
+    <string name="message_error_bug_report">An error occurred while fetching the data. Please report a bug issue in Settings</string>
+
+
+    <!-- Image Content Descriptions -->
+    <string name="icd_error_services_unavailable">Error image illustration to represent no services available</string>
 </resources>

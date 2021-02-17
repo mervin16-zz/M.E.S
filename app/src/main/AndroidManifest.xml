@@ -3,6 +3,7 @@
     package="com.th3pl4gu3.mes">
 
     <!-- For internet connection such as API querying -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

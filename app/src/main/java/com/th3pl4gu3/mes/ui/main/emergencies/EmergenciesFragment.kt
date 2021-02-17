@@ -73,7 +73,7 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
     }
 
     private fun subscribeEmergencies() {
-        val adapter = EmergencyAdapter(this)
+        val emergencyAdapter = EmergencyAdapter(this)
 
         binding.RecyclerViewEmergencies.apply {
             /*
@@ -86,17 +86,14 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
                 GridLayoutManager(requireContext(), 1, GridLayoutManager.HORIZONTAL, false)
 
             /* Bind the adapter to the RecyclerView*/
-            this.adapter = adapter
+            this.adapter = emergencyAdapter
         }
 
         viewModel.emergencies.observe(viewLifecycleOwner, { emergencies ->
             lifecycleScope.launch {
 
                 // Load emergency list
-                adapter.submitList(emergencies)
-
-                // Rebind adapter
-                binding.RecyclerViewEmergencies.adapter = adapter
+                emergencyAdapter.submitList(emergencies)
             }
         })
     }

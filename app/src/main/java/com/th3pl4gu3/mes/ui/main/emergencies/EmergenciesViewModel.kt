@@ -5,9 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.ApiRepository
 import com.th3pl4gu3.mes.api.Service
+import com.th3pl4gu3.mes.ui.utils.Global
+import com.th3pl4gu3.mes.ui.utils.Global.ID_API_SERVICE_POLICE
+import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class EmergenciesViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -44,23 +49,32 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
         mMessage.value = null
 
         viewModelScope.launch {
-            //TODO("Ensure connected to internet first")
-            val response = ApiRepository.getInstance().getEmergencies()
 
-            if (response.success) {
-                // Get emergency police
-                mEmergencyButtonHolder = response.services.first {
-                    it.identifier == "security-police-direct-1"
+            try {
+                if (Global.isNetworkConnected) {
+                    with(ApiRepository.getInstance().getEmergencies()) {
+                        if (success) {
+                            // Get emergency police
+                            mEmergencyButtonHolder = services.first {
+                                it.identifier == ID_API_SERVICE_POLICE
+                            }
+
+                            // Bind emergencies
+                            mEmergencies.value = ArrayList(services).apply {
+                                this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
+                            }
+
+                        } else {
+                            mMessage.value = message
+                        }
+                    }
+                } else {
+                    mMessage.value = getString(R.string.message_info_no_internet)
                 }
-
-                // Bind emergencies
-                mEmergencies.value = ArrayList(response.services).apply {
-                    this.removeIf { it.identifier == "security-police-direct-1" }
-                }
-
-            } else {
-                mMessage.value = response.message
+            } catch (e: Exception) {
+                mMessage.value = getString(R.string.message_error_bug_report)
             }
+
         }.invokeOnCompletion {
             // Set loading to false to
             // notify the fragment that loading

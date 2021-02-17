@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentAllServicesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
-import com.th3pl4gu3.mes.ui.utils.extensions.navigateTo
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 import kotlinx.coroutines.launch
@@ -60,7 +59,7 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
 
     // Private Functions
     private fun subscribeServices() {
-        val adapter = ServiceAdapter(this)
+        val servicesAdapter = ServiceAdapter(this)
 
         binding.RecyclerViewServices.apply {
             /*
@@ -72,16 +71,13 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
             layoutManager = LinearLayoutManager(requireContext())
 
             /* Bind the adapter to the RecyclerView*/
-            this.adapter = adapter
+            this.adapter = servicesAdapter
         }
 
         viewModel.services.observe(viewLifecycleOwner, { services ->
             if (services != null) {
                 lifecycleScope.launch {
-                    adapter.submitList(services)
-
-                    // Notify a change in list
-                    binding.RecyclerViewServices.adapter = adapter
+                    servicesAdapter.submitList(services)
                 }
             }
         })
@@ -113,7 +109,7 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
             }
         })
 
-        binding.TextFieldSearch.setOnEditorActionListener { v, actionId, _ ->
+        binding.TextFieldSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 binding.TextFieldSearch.clearFocus()
             }
