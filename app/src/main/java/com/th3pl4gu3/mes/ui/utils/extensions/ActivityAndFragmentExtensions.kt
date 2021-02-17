@@ -1,5 +1,6 @@
 package com.th3pl4gu3.mes.ui.utils.extensions
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
@@ -7,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.th3pl4gu3.mes.R
+import com.th3pl4gu3.mes.ui.MesActivity
 
 /**
  * Get the NavController in disregards
@@ -38,3 +40,8 @@ fun AppCompatActivity.mesToolBarConfiguration(toolbar: MaterialToolbar) {
     */
     supportActionBar?.setDisplayShowTitleEnabled(false)
 }
+
+/**
+ * Returns the MesActivity in particular
+ */
+fun Fragment.requireMesActivity() = requireActivity() as MesActivity

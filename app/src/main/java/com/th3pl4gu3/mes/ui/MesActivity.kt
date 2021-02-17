@@ -1,7 +1,12 @@
 package com.th3pl4gu3.mes.ui
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -11,14 +16,34 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.ActivityMesBinding
+import com.th3pl4gu3.mes.ui.utils.Global
 import com.th3pl4gu3.mes.ui.utils.extensions.contentView
 import com.th3pl4gu3.mes.ui.utils.extensions.mesToolBarConfiguration
 import com.th3pl4gu3.mes.ui.utils.extensions.navController
+import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 
-class MesActivity : AppCompatActivity() {
+class MesActivity : AppCompatActivity(), PhoneNumberListener {
 
     private val mBinding: ActivityMesBinding by contentView(R.layout.activity_mes)
     private lateinit var mAppBarConfiguration: AppBarConfiguration
+    private var mNetworkCallbackRegistered = false
+
+    // The network callback to update network connectivity
+    private val mNetworkCallback = object : ConnectivityManager.NetworkCallback() {
+        override fun onAvailable(network: Network) {
+            super.onAvailable(network)
+
+            // Sets a global variable to true
+            Global.isNetworkConnected = true
+        }
+
+        override fun onLost(network: Network) {
+            super.onLost(network)
+
+            // Sets a global variable to false
+            Global.isNetworkConnected = false
+        }
+    }
 
     /*
     * Fragments listed here are
@@ -28,8 +53,8 @@ class MesActivity : AppCompatActivity() {
     * ONLY list fragments that can open the drawer menu here
     */
     private val mNavigationFragments = setOf(
-            R.id.Fragment_Emergencies,
-            R.id.Fragment_All_Services
+        R.id.Fragment_Emergencies,
+        R.id.Fragment_All_Services
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,15 +67,44 @@ class MesActivity : AppCompatActivity() {
 
         // Setup the JetPack Navigation UI
         navigationUISetup()
+
+        registerNetworkCallback()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        /*
+         * If network callback not registered (This will happen if user sends app to the background)
+         * then register it again
+        */
+        if (!mNetworkCallbackRegistered) {
+            registerNetworkCallback()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        unregisterNetworkCallback()
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
-            item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(
-                    item
-            )
+        item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(
+            item
+        )
 
     override fun onSupportNavigateUp() = navController.navigateUp(mAppBarConfiguration)
 
+    override fun onPhoneNumberClicked(number: Long) {
+        /**
+         * All phone call intents reply to this function
+         * as single point of contact.
+         * It will handle all permission request and phone call intents
+         */
+        Log.v("NUMBER_CLICK_TEST", number.toString())
+        // TODO("Implement phone intent")
+    }
 
     /*
     * Private functions that are
@@ -65,9 +119,9 @@ class MesActivity : AppCompatActivity() {
 
             //Use Navigation UI to setup the app bar config and navigation view
             NavigationUI.setupActionBarWithNavController(
-                    this@MesActivity,
-                    this,
-                    mAppBarConfiguration
+                this@MesActivity,
+                this,
+                mAppBarConfiguration
             )
             NavigationUI.setupWithNavController(mBinding.NavigationView, this)
 
@@ -94,4 +148,37 @@ class MesActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun registerNetworkCallback() {
+        try {
+            // Get the connectivity manager
+            with(this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) {
+                // Register the network callback
+                registerNetworkCallback(NetworkRequest.Builder().build(), mNetworkCallback)
+            }
+
+            // By default set network to false
+            // If network is available, it will be automatically set
+            // in the callback
+            Global.isNetworkConnected = false
+
+            // Says that the registration has been done
+            mNetworkCallbackRegistered = true
+        } catch (e: Exception) {
+            Global.isNetworkConnected = false
+        }
+    }
+
+    private fun unregisterNetworkCallback() {
+
+        // Get the connectivity manager & unregister the network callback
+        with(this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) {
+            unregisterNetworkCallback(mNetworkCallback)
+        }
+
+        // Specifies that the registration has been undone
+        mNetworkCallbackRegistered = false
+
+    }
+
 }

@@ -3,7 +3,6 @@ package com.th3pl4gu3.mes.ui.main.all_services
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentAllServicesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
+import com.th3pl4gu3.mes.ui.utils.extensions.requireMesActivity
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
-import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 import kotlinx.coroutines.launch
 
-class AllServicesFragment : Fragment(), PhoneNumberListener {
+class AllServicesFragment : Fragment() {
 
     private var mBinding: FragmentAllServicesBinding? = null
     private var mViewModel: AllServicesViewModel? = null
@@ -52,14 +51,9 @@ class AllServicesFragment : Fragment(), PhoneNumberListener {
         mBinding = null
     }
 
-    override fun onPhoneNumberClicked(number: Long) {
-        Log.v("NUMBER_CLICK_TEST", number.toString())
-        // TODO("Implement phone intent")
-    }
-
     // Private Functions
     private fun subscribeServices() {
-        val servicesAdapter = ServiceAdapter(this)
+        val servicesAdapter = ServiceAdapter(requireMesActivity())
 
         binding.RecyclerViewServices.apply {
             /*

@@ -1,7 +1,6 @@
 package com.th3pl4gu3.mes.ui.main.emergencies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentEmergenciesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
+import com.th3pl4gu3.mes.ui.utils.extensions.requireMesActivity
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
-import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 import kotlinx.coroutines.launch
 
-class EmergenciesFragment : Fragment(), PhoneNumberListener {
+class EmergenciesFragment : Fragment() {
 
     private var mBinding: FragmentEmergenciesBinding? = null
     private var mViewModel: EmergenciesViewModel? = null
@@ -53,27 +52,23 @@ class EmergenciesFragment : Fragment(), PhoneNumberListener {
         mBinding = null
     }
 
-    override fun onPhoneNumberClicked(number: Long) {
-        Log.v("NUMBER_CLICK_TEST", number.toString())
-        // TODO("Implement phone intent")
-    }
-
-
     private fun subscribeButtons() {
         // Emergency Button
         binding.EmergencyButton.setOnLongClickListener {
 
-            val emergencyButtonHolder = viewModel.emergencyButtonHolder
+            // Gets the main emergency service
+            val service = viewModel.emergencyButtonHolder
 
-            Log.v("NUMBER_CLICK_TEST", emergencyButtonHolder?.number.toString())
+            // Call the central function for handling
+            // phone intents
+            requireMesActivity().onPhoneNumberClicked(service?.number!!)
 
             true
-            // TODO("Implement phone intent")
         }
     }
 
     private fun subscribeEmergencies() {
-        val emergencyAdapter = EmergencyAdapter(this)
+        val emergencyAdapter = EmergencyAdapter(requireMesActivity())
 
         binding.RecyclerViewEmergencies.apply {
             /*

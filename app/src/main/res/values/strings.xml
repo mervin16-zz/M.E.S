@@ -76,4 +76,7 @@
 
     <!-- Image Content Descriptions -->
     <string name="icd_error_services_unavailable">Error image illustration to represent no services available</string>
+
+    <string name="icd_service_logo">Represents the Service\'s Logo</string>
+    <string name="icd_arrow_logo">An arrow logo pointing to the service\'s logo</string>
 </resources>
