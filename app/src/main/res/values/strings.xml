@@ -11,7 +11,7 @@
     <string name="menu_drawer_settings">Settings</string>
     <string name="menu_drawer_about">About</string>
 
-    <!-- Titles & Subtitles-->
+    <!-- Titles, Subtitles & Messages-->
     <string name="title_drawer_categories_others">OTHERS</string>
 
     <string name="title_emergencies_main">Emergency Police Help Needed?</string>
@@ -20,9 +20,24 @@
     <string name="title_emergencies_otherAction">Need other emergency actions?</string>
     <string name="subtitle_emergencies_otherAction">Pick another action below</string>
 
+    <string name="title_permission_call_info">MES Phone Call Permission</string>
+    <string name="message_permission_call_info">
+        To be able to make phone calls for you, MES needs your permission. Please note that
+        phone calls are not made unless the user does so through the application.
+    </string>
+
+    <string name="title_permission_call_explicit">Allow Permissions in Settings</string>
+    <string name="message_permission_call_explicit">
+        To provide us the permission manually to make phone calls, please click Proceed > Permissions > Allow Phone Permissions
+    </string>
+
     <!-- Actions -->
     <string name="action_retry">Retry</string>
+    <string name="action_allow">Allow</string>
+    <string name="action_proceed">Proceed</string>
     <string name="action_search">Search</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ask_me_later">Ask Me Later</string>
 
     <!-- Settings -->
     <string name="settings_key_display_theme" translatable="false">settings_title_display_theme</string>
@@ -70,6 +85,7 @@
 
     <!-- Messages -->
     <string name="message_info_no_internet">You\'re not connected to the internet</string>
+    <string name="message_info_permission_denied">Permission has been denied</string>
 
     <string name="message_error_bug_report">An error occurred while fetching the data. Please report a bug issue in Settings</string>
 

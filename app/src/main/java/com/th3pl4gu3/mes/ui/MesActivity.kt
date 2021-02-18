@@ -1,12 +1,12 @@
 package com.th3pl4gu3.mes.ui
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -14,19 +14,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.ActivityMesBinding
 import com.th3pl4gu3.mes.ui.utils.Global
-import com.th3pl4gu3.mes.ui.utils.extensions.contentView
-import com.th3pl4gu3.mes.ui.utils.extensions.mesToolBarConfiguration
-import com.th3pl4gu3.mes.ui.utils.extensions.navController
+import com.th3pl4gu3.mes.ui.utils.extensions.*
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
+
+private const val REQUEST_CODE_PHONE_CALL_PERMISSION = 34
 
 class MesActivity : AppCompatActivity(), PhoneNumberListener {
 
     private val mBinding: ActivityMesBinding by contentView(R.layout.activity_mes)
     private lateinit var mAppBarConfiguration: AppBarConfiguration
     private var mNetworkCallbackRegistered = false
+
+    private var mPendingPhoneCall: String? = null
 
     // The network callback to update network connectivity
     private val mNetworkCallback = object : ConnectivityManager.NetworkCallback() {
@@ -68,6 +71,7 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
         // Setup the JetPack Navigation UI
         navigationUISetup()
 
+        // Check internet connection callback
         registerNetworkCallback()
     }
 
@@ -102,8 +106,42 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
          * as single point of contact.
          * It will handle all permission request and phone call intents
          */
-        Log.v("NUMBER_CLICK_TEST", number.toString())
-        // TODO("Implement phone intent")
+        // Using irrelevant number for testing purpose 
+        // TODO("To remove on production")
+        if (phoneCallPermissionApproved()) {
+            startActivity("8962356413531".getPhoneCallIntent)
+        } else {
+            // Put the phone call in pending state until permission approved
+            // TODO("To remove on production")
+            mPendingPhoneCall = "8962356413531"
+            requestPermission()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            REQUEST_CODE_PHONE_CALL_PERMISSION -> when (PackageManager.PERMISSION_GRANTED) {
+                grantResults[0] ->
+                    // Permission was granted.
+                    startActivity(mPendingPhoneCall?.getPhoneCallIntent)
+                else -> {
+                    // Permission denied.
+                    if (shouldShowCallPhoneRequestPermissionRationale()) {
+                        alertDialogPermissionRequestExplanation()
+                    } else {
+                        mBinding.LayoutCoordinatorMain.snack(getString(R.string.message_info_permission_denied)) {
+                            action(getString(R.string.action_retry)) {
+                                alertDialogExplicitPermissionRequest()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /*
@@ -181,4 +219,47 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
 
     }
 
+    private fun requestPermission() {
+        // Provide an additional rationale to the user if the permission was not granted
+        // and the user would benefit from additional context for the use of the permission.
+        if (shouldShowCallPhoneRequestPermissionRationale()) {
+            alertDialogPermissionRequestExplanation()
+        } else {
+            // Request permission
+            triggerCallPhoneRequestPermissionLogic(
+                REQUEST_CODE_PHONE_CALL_PERMISSION
+            )
+        }
+    }
+
+    // Alert Dialog Boxes
+    private fun alertDialogPermissionRequestExplanation() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.title_permission_call_info))
+            .setMessage(getString(R.string.message_permission_call_info))
+            .setNeutralButton(getString(R.string.action_ask_me_later)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(getString(R.string.action_allow)) { _, _ ->
+                // Request permission
+                triggerCallPhoneRequestPermissionLogic(
+                    REQUEST_CODE_PHONE_CALL_PERMISSION
+                )
+            }
+            .show()
+    }
+
+    private fun alertDialogExplicitPermissionRequest() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(getString(R.string.title_permission_call_explicit))
+            .setMessage(getString(R.string.message_permission_call_explicit))
+            .setNegativeButton(getString(R.string.action_cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(getString(R.string.action_proceed)) { _, _ ->
+                // Build intent that displays the App settings screen.
+                startActivity(requireAppSettingsIntent())
+            }
+            .show()
+    }
 }

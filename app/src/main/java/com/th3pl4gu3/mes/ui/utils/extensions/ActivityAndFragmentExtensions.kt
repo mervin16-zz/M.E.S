@@ -1,7 +1,9 @@
 package com.th3pl4gu3.mes.ui.utils.extensions
 
-import android.app.Activity
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -15,17 +17,6 @@ import com.th3pl4gu3.mes.ui.MesActivity
  * of the current user's activity
  **/
 inline val AppCompatActivity.navController get() = findNavController(R.id.Navigation_Host)
-
-/*
-* JetPack navigation made easy
-*/
-fun Fragment.navigateTo(destination: Int) {
-    this.findNavController().navigate(destination)
-}
-
-fun Fragment.navigateTo(directions: NavDirections) {
-    this.findNavController().navigate(directions)
-}
 
 /*
 * MES Toolbar configuration
@@ -45,3 +36,24 @@ fun AppCompatActivity.mesToolBarConfiguration(toolbar: MaterialToolbar) {
  * Returns the MesActivity in particular
  */
 fun Fragment.requireMesActivity() = requireActivity() as MesActivity
+
+
+/**
+ * Phone Call Permission Extensions
+ */
+fun AppCompatActivity.triggerCallPhoneRequestPermissionLogic(requestCode: Int) {
+    ActivityCompat.requestPermissions(
+        this,
+        arrayOf(Manifest.permission.CALL_PHONE),
+        requestCode
+    )
+}
+
+fun AppCompatActivity.phoneCallPermissionApproved(): Boolean =
+    PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
+        this,
+        Manifest.permission.CALL_PHONE
+    )
+
+fun AppCompatActivity.shouldShowCallPhoneRequestPermissionRationale() =
+    shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)
