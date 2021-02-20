@@ -20,6 +20,20 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="@string/settings_key_category_usability"
+        app:title="@string/settings_title_category_usability"
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false">
+
+        <SwitchPreference
+            android:key="@string/settings_key_usability_confirmation_call"
+            android:title="@string/settings_title_usability_confirmation_call"
+            app:summary="@string/settings_summary_usability_confirmation_call"
+            app:icon="@drawable/ic_phone" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="@string/settings_key_category_help"
         app:title="@string/settings_title_category_help">
 

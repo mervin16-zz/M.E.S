@@ -6,9 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.th3pl4gu3.mes.R
-import com.th3pl4gu3.mes.api.ApiRepository
 import com.th3pl4gu3.mes.api.Service
-import com.th3pl4gu3.mes.ui.utils.Global
+import com.th3pl4gu3.mes.ui.main.ServiceLoader
 import com.th3pl4gu3.mes.ui.utils.Global.ID_API_SERVICE_POLICE
 import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import kotlinx.coroutines.launch
@@ -51,25 +50,22 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
 
             try {
-                if (Global.isNetworkConnected) {
-                    with(ApiRepository.getInstance().getEmergencies()) {
-                        if (success) {
-                            // Get emergency police
-                            mEmergencyButtonHolder = services.first {
-                                it.identifier == ID_API_SERVICE_POLICE
-                            }
+                with(ServiceLoader.getInstance(getApplication())) {
+                    val services = fetch(emergencies = true)
 
-                            // Bind emergencies
-                            mEmergencies.value = ArrayList(services).apply {
-                                this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
-                            }
-
-                        } else {
-                            mMessage.value = message
+                    if (services != null) {
+                        // Get emergency police
+                        mEmergencyButtonHolder = services.first {
+                            it.identifier == ID_API_SERVICE_POLICE
                         }
+
+                        // Bind emergencies
+                        mEmergencies.value = ArrayList(services).apply {
+                            this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
+                        }
+                    } else {
+                        mMessage.value = this.message
                     }
-                } else {
-                    mMessage.value = getString(R.string.message_info_no_internet)
                 }
             } catch (e: Exception) {
                 mMessage.value = getString(R.string.message_error_bug_report)

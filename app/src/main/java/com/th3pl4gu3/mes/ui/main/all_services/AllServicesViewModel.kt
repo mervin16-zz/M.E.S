@@ -3,9 +3,8 @@ package com.th3pl4gu3.mes.ui.main.all_services
 import android.app.Application
 import androidx.lifecycle.*
 import com.th3pl4gu3.mes.R
-import com.th3pl4gu3.mes.api.ApiRepository
 import com.th3pl4gu3.mes.api.Service
-import com.th3pl4gu3.mes.ui.utils.Global
+import com.th3pl4gu3.mes.ui.main.ServiceLoader
 import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import com.th3pl4gu3.mes.ui.utils.extensions.lowercase
 import kotlinx.coroutines.launch
@@ -59,24 +58,20 @@ class AllServicesViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
 
             try {
-                if (Global.isNetworkConnected) {
+                with(ServiceLoader.getInstance(getApplication())) {
+                    val services = fetch(emergencies = false)
 
-                    with(ApiRepository.getInstance().getServices()) {
-                        if (success) {
-                            // Bind raw services
-                            mRawServices = ArrayList(services)
+                    if (services != null) {
+                        // Bind raw services
+                        mRawServices = ArrayList(services)
 
-                            // Set the default search string
-                            mSearchQuery.value = ""
-
-                        } else {
-                            mMessage.value = message
-                        }
+                        // Set the default search string
+                        mSearchQuery.value = ""
+                    } else {
+                        mMessage.value = this.message
                     }
-
-                } else {
-                    mMessage.value = getString(R.string.message_info_no_internet)
                 }
+
             } catch (e: Exception) {
                 mMessage.value = getString(R.string.message_error_bug_report)
             }
