@@ -15,13 +15,12 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.th3pl4gu3.mes.NavigationDrawerMainDirections
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.ActivityMesBinding
 import com.th3pl4gu3.mes.ui.utils.Global
 import com.th3pl4gu3.mes.ui.utils.extensions.*
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
-
-private const val REQUEST_CODE_PHONE_CALL_PERMISSION = 34
 
 class MesActivity : AppCompatActivity(), PhoneNumberListener {
 
@@ -30,6 +29,10 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
     private var mNetworkCallbackRegistered = false
 
     private var mPendingPhoneCall: String? = null
+
+    companion object {
+        private const val REQUEST_CODE_PHONE_CALL_PERMISSION = 34
+    }
 
     // The network callback to update network connectivity
     private val mNetworkCallback = object : ConnectivityManager.NetworkCallback() {
@@ -106,14 +109,12 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
          * as single point of contact.
          * It will handle all permission request and phone call intents
          */
-        // Using irrelevant number for testing purpose 
-        // TODO("To remove on production")
+        // Using irrelevant number for testing purpose
         if (phoneCallPermissionApproved()) {
-            startActivity("8962356413531".getPhoneCallIntent)
+            navigateTo(NavigationDrawerMainDirections.actionGlobalFragmentPreCall(number.toString()))
         } else {
             // Put the phone call in pending state until permission approved
-            // TODO("To remove on production")
-            mPendingPhoneCall = "8962356413531"
+            mPendingPhoneCall = number.toString()
             requestPermission()
         }
     }
@@ -127,7 +128,13 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
             REQUEST_CODE_PHONE_CALL_PERMISSION -> when (PackageManager.PERMISSION_GRANTED) {
                 grantResults[0] ->
                     // Permission was granted.
-                    startActivity(mPendingPhoneCall?.getPhoneCallIntent)
+                    if (!mPendingPhoneCall.isNullOrEmpty()) {
+                        navigateTo(
+                            NavigationDrawerMainDirections.actionGlobalFragmentPreCall(
+                                mPendingPhoneCall!!
+                            )
+                        )
+                    }
                 else -> {
                     // Permission denied.
                     if (shouldShowCallPhoneRequestPermissionRationale()) {

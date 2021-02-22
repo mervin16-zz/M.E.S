@@ -11,7 +11,7 @@ import android.provider.Settings
  */
 
 // Returns an Action Call Intent
-inline val String.getPhoneCallIntent: Intent
+inline val String.toPhoneCallIntent: Intent
     get() {
         val intent = Intent(Intent.ACTION_CALL)
         intent.data = Uri.parse("tel:$this")

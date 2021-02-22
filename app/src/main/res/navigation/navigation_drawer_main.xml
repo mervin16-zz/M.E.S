@@ -6,6 +6,14 @@
     app:startDestination="@id/Fragment_Emergencies">
 
     <!--
+        Global Actions
+    -->
+    <action
+        android:id="@+id/action_global_Fragment_PreCall"
+        app:destination="@id/Fragment_PreCall" />
+
+
+    <!--
         Main Fragments residing in
         the main section of the drawer
     -->
@@ -42,5 +50,19 @@
         android:id="@+id/Fragment_Settings"
         android:name="com.th3pl4gu3.mes.ui.settings.SettingsFragment"
         android:label="@string/menu_drawer_settings" />
+
+
+    <!--
+        Countdown screen before launching a call
+    -->
+    <fragment
+        android:id="@+id/Fragment_PreCall"
+        android:name="com.th3pl4gu3.mes.ui.main.precall.PreCallFragment"
+        android:label="Launching Call"
+        tools:layout="@layout/fragment_precall">
+        <argument
+            android:name="PHONE_NUMBER"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

@@ -73,12 +73,14 @@
     </style>
 
     <style name="Mes.Text.Title.List.AboutItem">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/google_sans_medium</item>
+        <item name="android:fontFamily">@font/google_sans_medium</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="Mes.Text.Subtitle.List.AboutItem">
-        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/google_sans_medium</item>
+        <item name="android:fontFamily">@font/google_sans_medium</item>
         <item name="android:letterSpacing">0.0</item>
     </style>
 </resources>

@@ -57,3 +57,15 @@ fun AppCompatActivity.phoneCallPermissionApproved(): Boolean =
 
 fun AppCompatActivity.shouldShowCallPhoneRequestPermissionRationale() =
     shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)
+
+
+/**
+ * Navigation Architecture component made easy
+ */
+fun AppCompatActivity.navigateTo(directions: NavDirections) {
+    findNavController(R.id.Navigation_Host).navigate(directions)
+}
+
+fun Fragment.pop() {
+    findNavController().popBackStack()
+}

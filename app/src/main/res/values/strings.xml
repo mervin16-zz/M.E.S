@@ -41,19 +41,10 @@
 
     <!-- Settings -->
     <string name="settings_key_category_display" translatable="false">settings_key_category_display</string>
-    <string name="settings_key_category_usability" translatable="false">settings_key_category_usability</string>
     <string name="settings_key_category_help" translatable="false">settings_key_category_help</string>
 
     <string name="settings_title_category_display">Display</string>
-    <string name="settings_title_category_usability">Display</string>
     <string name="settings_title_category_help">Help</string>
-
-
-    <string name="settings_key_usability_confirmation_call" translatable="false">settings_key_usability_confirmation_call</string>
-    <string name="settings_title_usability_confirmation_call">Confirm before Calling</string>
-    <string name="settings_summary_usability_confirmation_call">
-        If enabled, Mes will ask you before making a call. (NOTE: In case of critical emergencies, a prompt might slow you down before the call)
-    </string>
 
     <string name="settings_key_display_theme" translatable="false">settings_title_display_theme</string>
     <string name="settings_title_display_theme">App Theme</string>
