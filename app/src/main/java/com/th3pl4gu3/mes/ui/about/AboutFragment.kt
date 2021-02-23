@@ -44,7 +44,6 @@ class AboutFragment : Fragment(), AboutItemListener {
     }
 
     override fun onItemClick(item: AboutItem.Item) {
-        //TODO("Implement About Item Clicks")
     }
 
     // Private functions

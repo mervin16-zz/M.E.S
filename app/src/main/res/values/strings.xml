@@ -87,7 +87,7 @@
 
 
     <!-- Messages -->
-    <string name="message_info_no_internet">You\'re not connected to the internet</string>
+    <string name="message_info_no_internet">You need to be connected to the internet for the first time to fetch the services.</string>
     <string name="message_info_permission_denied">Permission has been denied</string>
 
     <string name="message_error_bug_report">An error occurred while fetching the data. Please report a bug issue in Settings</string>

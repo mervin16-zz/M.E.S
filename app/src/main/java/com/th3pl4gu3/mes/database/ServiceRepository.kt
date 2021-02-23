@@ -1,7 +1,10 @@
 package com.th3pl4gu3.mes.database
 
 import android.app.Application
+import com.th3pl4gu3.mes.api.ApiRepository
 import com.th3pl4gu3.mes.api.Service
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /*
 * Repository pattern for Service CRUD
@@ -24,9 +27,25 @@ class ServiceRepository private constructor(application: Application) {
             }
     }
 
+    private suspend fun insertAll(services: List<Service>) = serviceDao.insertAll(services)
+
     suspend fun getAll() = serviceDao.getAll()
 
     suspend fun getEmergencies() = serviceDao.getEmergencies()
 
-    suspend fun insertAll(services: List<Service>) = serviceDao.insertAll(services)
+    suspend fun refresh(): String? {
+        var message: String? = null
+
+        withContext(Dispatchers.IO) {
+            val response = ApiRepository.getInstance().getServices()
+            if (response.success) {
+                insertAll(response.services)
+            } else {
+                message = response.message
+            }
+        }
+
+        return message
+    }
+
 }

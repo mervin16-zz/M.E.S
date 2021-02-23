@@ -30,9 +30,11 @@ class ServiceLoader private constructor(private val application: Application) {
     }
 
     suspend fun fetch(emergencies: Boolean): List<Service>? {
+        // TODO("Improve fetch by deciding when to fetch from network, when from cache, and improving how to update fetch from network")
+
         // We first try to fetch services from cache
-        val cachedServices = if (!emergencies) ServiceRepository.getInstance(application)
-            .getAll() else ServiceRepository.getInstance(application).getEmergencies()
+        val sRepo = ServiceRepository.getInstance(application)
+        val cachedServices = if (!emergencies) sRepo.getAll() else sRepo.getEmergencies()
 
         // If cache is null or empty
         // We try to load from remote repo (API)
@@ -42,19 +44,16 @@ class ServiceLoader private constructor(private val application: Application) {
             // We check if we are connected to internet or not
             // From the variable passed into the loader
             if (Global.isNetworkConnected) {
-                with(ApiRepository.getInstance().getServices()) {
-                    return if (success) {
-                        // Response was successful
-                        // We cache the services
-                        ServiceRepository.getInstance(application).insertAll(services)
 
-                        // We serve the services back
-                        return if (emergencies) services.filter { it.type == "E" } else services
-                    } else {
-                        // Response was not successful
-                        mMessage = message
-                        null
-                    }
+                val message = sRepo.refresh()
+
+                return if (message == null) {
+                    val services = sRepo.getAll()
+                    if (emergencies) services.filter { it.type == "E" } else services
+                } else {
+                    // Response was not successful
+                    mMessage = message
+                    null
                 }
             } else {
                 // Sets the error message
@@ -63,7 +62,6 @@ class ServiceLoader private constructor(private val application: Application) {
             }
         }
 
-        //TODO("Create a worker to occasionally fetch updated data)
         // If the code reached this
         // It means that cache was available
         return cachedServices
