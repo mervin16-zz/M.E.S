@@ -17,6 +17,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.th3pl4gu3.mes.NavigationDrawerMainDirections
 import com.th3pl4gu3.mes.R
+import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.databinding.ActivityMesBinding
 import com.th3pl4gu3.mes.ui.utils.Global
 import com.th3pl4gu3.mes.ui.utils.extensions.*
@@ -28,7 +29,7 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
     private lateinit var mAppBarConfiguration: AppBarConfiguration
     private var mNetworkCallbackRegistered = false
 
-    private var mPendingPhoneCall: String? = null
+    private var mPendingServiceRedirection: Service? = null
 
     companion object {
         private const val REQUEST_CODE_PHONE_CALL_PERMISSION = 34
@@ -103,7 +104,7 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
 
     override fun onSupportNavigateUp() = navController.navigateUp(mAppBarConfiguration)
 
-    override fun onPhoneNumberClicked(number: Long) {
+    override fun onPhoneNumberClicked(service: Service) {
         /**
          * All phone call intents reply to this function
          * as single point of contact.
@@ -111,10 +112,10 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
          */
         // Using irrelevant number for testing purpose
         if (phoneCallPermissionApproved()) {
-            navigateTo(NavigationDrawerMainDirections.actionGlobalFragmentPreCall(number.toString()))
+            navigateTo(NavigationDrawerMainDirections.actionGlobalFragmentPreCall(service))
         } else {
             // Put the phone call in pending state until permission approved
-            mPendingPhoneCall = number.toString()
+            mPendingServiceRedirection = service
             requestPermission()
         }
     }
@@ -128,10 +129,10 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
             REQUEST_CODE_PHONE_CALL_PERMISSION -> when (PackageManager.PERMISSION_GRANTED) {
                 grantResults[0] ->
                     // Permission was granted.
-                    if (!mPendingPhoneCall.isNullOrEmpty()) {
+                    if (mPendingServiceRedirection != null) {
                         navigateTo(
                             NavigationDrawerMainDirections.actionGlobalFragmentPreCall(
-                                mPendingPhoneCall!!
+                                mPendingServiceRedirection!!
                             )
                         )
                     }

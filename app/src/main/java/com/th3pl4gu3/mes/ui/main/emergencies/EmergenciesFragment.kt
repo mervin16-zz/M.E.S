@@ -61,7 +61,7 @@ class EmergenciesFragment : Fragment() {
 
             // Call the central function for handling
             // phone intents
-            requireMesActivity().onPhoneNumberClicked(service?.number!!)
+            requireMesActivity().onPhoneNumberClicked(service!!)
 
             true
         }

@@ -23,4 +23,8 @@
 
     <!-- Light grey-blue shade -->
     <color name="light_blue_grey_50">#EFF2F9</color>
+
+
+    <!-- Launcher Icon Colors -->
+    <color name="ic_launcher_background">@color/red_400</color>
 </resources>

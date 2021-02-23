@@ -31,6 +31,9 @@
         To provide us the permission manually to make phone calls, please click Proceed > Permissions > Allow Phone Permissions
     </string>
 
+    <string name="title_precall_title">Emergency %1$s</string>
+    <string name="title_precall_subtitle">Don\'t panic. Starting a call to %1$s for you</string>
+
     <!-- Actions -->
     <string name="action_retry">Retry</string>
     <string name="action_allow">Allow</string>
@@ -90,9 +93,14 @@
     <string name="message_error_bug_report">An error occurred while fetching the data. Please report a bug issue in Settings</string>
 
 
+    <!-- Styling -->
+    <string name="styling_seconds_s">%1$ss</string>
+
     <!-- Image Content Descriptions -->
     <string name="icd_error_services_unavailable">Error image illustration to represent no services available</string>
 
     <string name="icd_service_logo">Represents the Service\'s Logo</string>
     <string name="icd_arrow_logo">An arrow logo pointing to the service\'s logo</string>
+
+    <string name="icd_close_call_countdown">A round button to stop the call countdown</string>
 </resources>

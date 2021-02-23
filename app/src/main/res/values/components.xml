@@ -51,7 +51,7 @@
         <item name="icon">@drawable/ic_emergency</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
-        <item name="iconSize">48dp</item>
+        <item name="iconSize">24dp</item>
         <item name="iconTint">@color/white</item>
         <item name="shapeAppearanceOverlay">@style/Mes.Button.Shape.Circle</item>
         <item name="strokeColor">?attr/colorScreenSurface</item>

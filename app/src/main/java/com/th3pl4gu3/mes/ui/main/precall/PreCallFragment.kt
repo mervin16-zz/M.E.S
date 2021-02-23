@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentPrecallBinding
-import com.th3pl4gu3.mes.ui.utils.extensions.pop
-import com.th3pl4gu3.mes.ui.utils.extensions.toPhoneCallIntent
+import com.th3pl4gu3.mes.ui.utils.extensions.*
 import java.util.concurrent.TimeUnit
 
 
@@ -23,6 +23,23 @@ class PreCallFragment : Fragment() {
     private val binding get() = mBinding!!
     private val viewModel get() = mViewModel!!
 
+    private val mCountDown = object : CountDownTimer(5000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            viewModel.tick(TimeUnit.SECONDS.convert(millisUntilFinished, TimeUnit.MILLISECONDS))
+        }
+
+        override fun onFinish() {
+
+            Log.d(
+                "PHONE_NUMBER_TEST",
+                "Phone number retrieved: ${viewModel.retrievedService?.number}"
+            )
+
+            //startActivity("8962356413531".toPhoneCallIntent)
+            Log.d("PHONE_NUMBER_TEST", "Call Started")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,6 +47,7 @@ class PreCallFragment : Fragment() {
     ): View {
         mBinding = FragmentPrecallBinding.inflate(inflater, container, false)
         mViewModel = ViewModelProvider(this).get(PreCallViewModel::class.java)
+        binding.viewModel = viewModel
         // Bind lifecycle owner
         binding.lifecycleOwner = this
 
@@ -39,23 +57,14 @@ class PreCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val phoneNumberRetrieved = PreCallFragmentArgs.fromBundle(requireArguments()).phonenumber
+        // Hide the Main Toolbar
+        requireMesToolBar().hide()
 
-        Log.d("PHONE_NUMBER_TEST", "Phone number retrieved: $phoneNumberRetrieved")
+        // Subscribe Listeners
+        subscribeListeners()
 
-        object : CountDownTimer(3000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                Log.d(
-                    "PHONE_NUMBER_TEST",
-                    "Ticks: ${TimeUnit.SECONDS.convert(millisUntilFinished, TimeUnit.MILLISECONDS)}"
-                )
-            }
-
-            override fun onFinish() {
-                //startActivity("8962356413531".toPhoneCallIntent)
-                Log.d("PHONE_NUMBER_TEST", "Call Started")
-            }
-        }.start()
+        // Update service data received and subscribe the countdown
+        updateServiceDataAndStartCountdown()
     }
 
     override fun onPause() {
@@ -65,12 +74,44 @@ class PreCallFragment : Fragment() {
         * If the countdown is successful or
         * if the user leaves the screen prematurely
         * fragment will be popped out of back stack
+        * and countdown will be cancelled
         */
-        pop()
+
+        // Cancel countdown
+        mCountDown.cancel()
+
+        if (findNavController().currentDestination?.id == R.id.Fragment_PreCall) {
+            // Go back to previous page
+            popTo(R.id.Fragment_Emergencies)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        // Show the Main Toolbar
+        requireMesToolBar().show()
+
         mBinding = null
+    }
+
+    private fun subscribeListeners() {
+
+        // Cancel button listener
+        binding.ButtonCancel.setOnClickListener {
+            popTo(R.id.Fragment_Emergencies)
+        }
+    }
+
+    private fun updateServiceDataAndStartCountdown() {
+
+        // Get the service passed
+        val serviceRetrieved = PreCallFragmentArgs.fromBundle(requireArguments()).argsservice
+
+        // Update fields with service data
+        viewModel.updateService(serviceRetrieved)
+
+        // Start countdown
+        mCountDown.start()
     }
 }

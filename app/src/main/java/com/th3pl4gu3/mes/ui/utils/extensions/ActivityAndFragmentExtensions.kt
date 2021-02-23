@@ -2,6 +2,8 @@ package com.th3pl4gu3.mes.ui.utils.extensions
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.view.View
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -31,6 +33,18 @@ fun AppCompatActivity.mesToolBarConfiguration(toolbar: MaterialToolbar) {
     */
     supportActionBar?.setDisplayShowTitleEnabled(false)
 }
+
+fun Fragment.requireMesToolBar(): MaterialToolbar =
+    requireMesActivity().findViewById(R.id.Toolbar_Main)
+
+fun MaterialToolbar.hide() {
+    this.visibility = View.GONE
+}
+
+fun MaterialToolbar.show() {
+    this.visibility = View.VISIBLE
+}
+
 
 /**
  * Returns the MesActivity in particular
@@ -66,6 +80,10 @@ fun AppCompatActivity.navigateTo(directions: NavDirections) {
     findNavController(R.id.Navigation_Host).navigate(directions)
 }
 
-fun Fragment.pop() {
-    findNavController().popBackStack()
+fun Fragment.navigateTo(directions: NavDirections) {
+    findNavController().navigate(directions)
+}
+
+fun Fragment.popTo(@IdRes destination: Int) {
+    findNavController().popBackStack(destination, false)
 }

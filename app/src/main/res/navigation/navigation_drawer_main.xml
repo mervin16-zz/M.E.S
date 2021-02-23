@@ -61,8 +61,8 @@
         android:label="Launching Call"
         tools:layout="@layout/fragment_precall">
         <argument
-            android:name="PHONE_NUMBER"
-            app:argType="string" />
+            android:name="ARGS_SERVICE"
+            app:argType="com.th3pl4gu3.mes.api.Service" />
     </fragment>
 
 </navigation>

@@ -24,7 +24,7 @@
         android:layout_margin="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{ () -> PhoneNumberListener.onPhoneNumberClicked(Service.number) }">
+        android:onClick="@{ () -> PhoneNumberListener.onPhoneNumberClicked(Service) }">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
