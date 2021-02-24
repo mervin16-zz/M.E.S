@@ -1,8 +1,10 @@
 package com.th3pl4gu3.mes.ui.utils.extensions
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -84,6 +86,16 @@ fun Fragment.navigateTo(directions: NavDirections) {
     findNavController().navigate(directions)
 }
 
-fun Fragment.popTo(@IdRes destination: Int) {
-    findNavController().popBackStack(destination, false)
+fun Fragment.pop() {
+    findNavController().popBackStack()
+}
+
+
+/*
+* Hides soft keyboard
+*/
+fun AppCompatActivity.hideSoftKeyboard() {
+    val inputMethodManager =
+        this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 }

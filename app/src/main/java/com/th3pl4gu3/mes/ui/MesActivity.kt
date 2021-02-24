@@ -182,7 +182,13 @@ class MesActivity : AppCompatActivity(), PhoneNumberListener {
             // Update the toolbar title
             mBinding.ToolbarMainTitle.text = nd.label
 
-            // Update UI according to navigation destination
+            // Update Soft Keyboard visibility
+            // Only all services should be able to show a keyboard
+            if (nd.id != R.id.Fragment_All_Services) {
+                this.hideSoftKeyboard()
+            }
+
+            // Update Drawer Lock Mode
             when (nd.id) {
                 R.id.Fragment_Emergencies,
                 R.id.Fragment_All_Services -> {

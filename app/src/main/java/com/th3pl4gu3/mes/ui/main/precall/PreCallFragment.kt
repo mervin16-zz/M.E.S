@@ -82,7 +82,7 @@ class PreCallFragment : Fragment() {
 
         if (findNavController().currentDestination?.id == R.id.Fragment_PreCall) {
             // Go back to previous page
-            popTo(R.id.Fragment_Emergencies)
+            pop()
         }
     }
 
@@ -99,7 +99,7 @@ class PreCallFragment : Fragment() {
 
         // Cancel button listener
         binding.ButtonCancel.setOnClickListener {
-            popTo(R.id.Fragment_Emergencies)
+            pop()
         }
     }
 
