@@ -17,8 +17,11 @@ interface ServiceDao {
     suspend fun insertAll(services: List<Service>)
 
     @Query("SELECT * FROM service_table")
-    suspend fun getAll(): List<Service>
+    fun getAll(): LiveData<List<Service>>
 
     @Query("SELECT * FROM service_table WHERE type = 'E'")
-    suspend fun getEmergencies(): List<Service>
+    fun getEmergencies(): LiveData<List<Service>>
+
+    @Query("SELECT COUNT(DISTINCT identifier) from service_table")
+    suspend fun count(): Int
 }

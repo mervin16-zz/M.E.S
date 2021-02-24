@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentEmergenciesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
 import com.th3pl4gu3.mes.ui.utils.extensions.requireMesActivity
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
-import kotlinx.coroutines.launch
 
 class EmergenciesFragment : Fragment() {
 
@@ -77,16 +75,15 @@ class EmergenciesFragment : Fragment() {
             setHasFixedSize(true)
 
             /* Bind the layout manager */
-            binding.RecyclerViewEmergencies.layoutManager =
+            layoutManager =
                 GridLayoutManager(requireContext(), 1, GridLayoutManager.HORIZONTAL, false)
 
             /* Bind the adapter to the RecyclerView*/
-            this.adapter = emergencyAdapter
+            adapter = emergencyAdapter
         }
 
         viewModel.emergencies.observe(viewLifecycleOwner, { emergencies ->
-            lifecycleScope.launch {
-
+            if (emergencies != null) {
                 // Load emergency list
                 emergencyAdapter.submitList(emergencies)
             }
@@ -98,7 +95,7 @@ class EmergenciesFragment : Fragment() {
             if (error != null) {
                 binding.RootEmergencies.snackInf(error) {
                     action(getString(R.string.action_retry)) {
-                        viewModel.loadServices()
+                        viewModel.refreshServices()
                     }
                 }
             }

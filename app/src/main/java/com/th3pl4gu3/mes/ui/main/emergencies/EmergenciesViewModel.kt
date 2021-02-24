@@ -1,13 +1,11 @@
 package com.th3pl4gu3.mes.ui.main.emergencies
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.Service
-import com.th3pl4gu3.mes.ui.main.ServiceLoader
+import com.th3pl4gu3.mes.database.ServiceRepository
+import com.th3pl4gu3.mes.ui.utils.Global
 import com.th3pl4gu3.mes.ui.utils.Global.ID_API_SERVICE_POLICE
 import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import kotlinx.coroutines.launch
@@ -18,7 +16,6 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
     // Private Variables
     private val mMessage = MutableLiveData<String>()
     private val mLoading = MutableLiveData(true)
-    private var mEmergencies = MutableLiveData<List<Service>>()
     private var mEmergencyButtonHolder: Service? = null
 
     // Properties
@@ -31,41 +28,41 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
     val loading: LiveData<Boolean>
         get() = mLoading
 
-    val emergencies: LiveData<List<Service>>
-        get() = mEmergencies
+    val emergencies: LiveData<List<Service>> = Transformations.map(
+        ServiceRepository.getInstance(getApplication()).getEmergencies()
+    ) { services ->
+        // Assign the police direct line 1 service as emergency button
+        mEmergencyButtonHolder = services.first {
+            it.identifier == ID_API_SERVICE_POLICE
+        }
 
-    init {
-        loadServices()
+        // Remove the emergency button service from other emergencies list
+        return@map ArrayList(services).apply {
+            this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
+        }
     }
 
-    internal fun loadServices() {
+    init {
+        refreshServices()
+    }
 
-        // Set loading to true to
-        // notify the fragment that loading
-        // has started and to show loading animation
-        mLoading.value = true
-        // Reset previous Message value
-        mMessage.value = null
+    internal fun refreshServices() {
 
         viewModelScope.launch {
 
+            // Set loading to true to
+            // notify the fragment that loading
+            // has started and to show loading animation
+            // TODO("Show loading animation only when loading from cache. Background refresh should not block UI")
+            mLoading.value = true
+            // Reset previous Message value
+            mMessage.value = null
+
             try {
-                with(ServiceLoader.getInstance(getApplication())) {
-                    val services = fetch(emergencies = true)
-
-                    if (services != null) {
-                        // Get emergency police
-                        mEmergencyButtonHolder = services.first {
-                            it.identifier == ID_API_SERVICE_POLICE
-                        }
-
-                        // Bind emergencies
-                        mEmergencies.value = ArrayList(services).apply {
-                            this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
-                        }
-                    } else {
-                        mMessage.value = this.message
-                    }
+                if (Global.isNetworkConnected) {
+                    ServiceRepository.getInstance(getApplication()).refresh()
+                } else {
+                    mMessage.value = getString(R.string.message_info_no_internet)
                 }
             } catch (e: Exception) {
                 mMessage.value = getString(R.string.message_error_bug_report)

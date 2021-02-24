@@ -29,9 +29,11 @@ class ServiceRepository private constructor(application: Application) {
 
     private suspend fun insertAll(services: List<Service>) = serviceDao.insertAll(services)
 
-    suspend fun getAll() = serviceDao.getAll()
+    fun getAll() = serviceDao.getAll()
 
-    suspend fun getEmergencies() = serviceDao.getEmergencies()
+    fun getEmergencies() = serviceDao.getEmergencies()
+
+    suspend fun hasData(): Boolean = serviceDao.count() > 0
 
     suspend fun refresh(): String? {
         var message: String? = null

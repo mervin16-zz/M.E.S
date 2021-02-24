@@ -9,14 +9,12 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentAllServicesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
 import com.th3pl4gu3.mes.ui.utils.extensions.requireMesActivity
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
-import kotlinx.coroutines.launch
 
 class AllServicesFragment : Fragment() {
 
@@ -65,14 +63,15 @@ class AllServicesFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
 
             /* Bind the adapter to the RecyclerView*/
-            this.adapter = servicesAdapter
+            adapter = servicesAdapter
         }
 
         viewModel.services.observe(viewLifecycleOwner, { services ->
             if (services != null) {
-                lifecycleScope.launch {
-                    servicesAdapter.submitList(services)
-                }
+
+                servicesAdapter.submitList(services)
+
+                binding.RecyclerViewServices.adapter = servicesAdapter
             }
         })
 
@@ -83,7 +82,7 @@ class AllServicesFragment : Fragment() {
             if (it != null) {
                 binding.RootAllServices.snackInf(it) {
                     action(getString(R.string.action_retry)) {
-                        viewModel.loadServices()
+                        viewModel.refreshServices()
                     }
                 }
             }
@@ -95,6 +94,7 @@ class AllServicesFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // TODO("Use 2-way binding")
                 viewModel.search(p0.toString())
             }
 
