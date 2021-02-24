@@ -61,6 +61,7 @@
                     android:layout_margin="16dp"
                     android:drawablePadding="-24dp"
                     android:hint="@string/action_search"
+                    android:text="@={ViewModel.searchQuery}"
                     android:imeOptions="actionSearch"
                     android:padding="24dp"
                     android:singleLine="true"

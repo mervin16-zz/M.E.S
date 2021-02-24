@@ -1,12 +1,9 @@
 package com.th3pl4gu3.mes.ui.main.all_services
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,9 +66,11 @@ class AllServicesFragment : Fragment() {
         viewModel.services.observe(viewLifecycleOwner, { services ->
             if (services != null) {
 
+                // Serve services (pun-intended)
                 servicesAdapter.submitList(services)
 
-                binding.RecyclerViewServices.adapter = servicesAdapter
+                // Updates UI animation
+                viewModel.stopLoading()
             }
         })
 
@@ -87,27 +86,5 @@ class AllServicesFragment : Fragment() {
                 }
             }
         })
-
-        binding.TextFieldSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                return
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // TODO("Use 2-way binding")
-                viewModel.search(p0.toString())
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                return
-            }
-        })
-
-        binding.TextFieldSearch.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                binding.TextFieldSearch.clearFocus()
-            }
-            false
-        }
     }
 }

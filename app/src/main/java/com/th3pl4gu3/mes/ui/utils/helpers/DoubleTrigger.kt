@@ -1,4 +1,4 @@
-package com.th3pl4gu3.mes.ui.utils
+package com.th3pl4gu3.mes.ui.utils.helpers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

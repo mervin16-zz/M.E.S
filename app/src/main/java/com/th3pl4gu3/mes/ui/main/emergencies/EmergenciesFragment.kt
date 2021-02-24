@@ -84,8 +84,12 @@ class EmergenciesFragment : Fragment() {
 
         viewModel.emergencies.observe(viewLifecycleOwner, { emergencies ->
             if (emergencies != null) {
-                // Load emergency list
+
+                // Serve emergencies
                 emergencyAdapter.submitList(emergencies)
+
+                // Updates UI animation
+                viewModel.stopLoading()
             }
         })
     }

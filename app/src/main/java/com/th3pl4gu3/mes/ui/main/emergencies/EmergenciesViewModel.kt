@@ -5,8 +5,8 @@ import androidx.lifecycle.*
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.database.ServiceRepository
-import com.th3pl4gu3.mes.ui.utils.Global
-import com.th3pl4gu3.mes.ui.utils.Global.ID_API_SERVICE_POLICE
+import com.th3pl4gu3.mes.ui.utils.helpers.Global
+import com.th3pl4gu3.mes.ui.utils.helpers.Global.ID_API_SERVICE_POLICE
 import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -43,6 +43,8 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     init {
+        startLoading()
+
         refreshServices()
     }
 
@@ -50,11 +52,6 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
 
         viewModelScope.launch {
 
-            // Set loading to true to
-            // notify the fragment that loading
-            // has started and to show loading animation
-            // TODO("Show loading animation only when loading from cache. Background refresh should not block UI")
-            mLoading.value = true
             // Reset previous Message value
             mMessage.value = null
 
@@ -68,11 +65,24 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
                 mMessage.value = getString(R.string.message_error_bug_report)
             }
 
-        }.invokeOnCompletion {
-            // Set loading to false to
-            // notify the fragment that loading
-            // has completed and to hide loading animation
-            mLoading.value = false
         }
+    }
+
+    internal fun stopLoading() {
+
+        // Set loading to false to
+        // notify the fragment that loading
+        // has completed and to hide loading animation
+        mLoading.value = false
+
+    }
+
+    private fun startLoading() {
+
+        // Set loading to true to
+        // notify the fragment that loading
+        // has started and to show loading animation
+        mLoading.value = true
+
     }
 }
