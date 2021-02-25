@@ -3,16 +3,21 @@ package com.th3pl4gu3.mes.ui.main.all_services
 import android.app.Application
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
+import androidx.paging.DataSource
+import androidx.paging.toLiveData
 import com.th3pl4gu3.mes.BR
 import com.th3pl4gu3.mes.R
+import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.database.ServiceRepository
 import com.th3pl4gu3.mes.ui.utils.helpers.DoubleTrigger
 import com.th3pl4gu3.mes.ui.utils.helpers.Global
 import com.th3pl4gu3.mes.ui.utils.extensions.getString
 import com.th3pl4gu3.mes.ui.utils.extensions.lowercase
+import com.th3pl4gu3.mes.ui.utils.helpers.Global.SIZE_PAGE_LIST_DEFAULT
 import com.th3pl4gu3.mes.ui.utils.helpers.ObservableViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.*
 
 class AllServicesViewModel(application: Application) : ObservableViewModel(application) {
 
@@ -20,6 +25,7 @@ class AllServicesViewModel(application: Application) : ObservableViewModel(appli
     private val mMessage = MutableLiveData<String>()
     private val mLoading = MutableLiveData(false)
     private var mSearchQuery = MutableLiveData("")
+    private var mServices = ServiceRepository.getInstance(getApplication()).getAll()
 
     // Properties
     val message: LiveData<String>
@@ -28,23 +34,20 @@ class AllServicesViewModel(application: Application) : ObservableViewModel(appli
     val loading: LiveData<Boolean>
         get() = mLoading
 
-    val services = Transformations.map(
-        DoubleTrigger(
-            ServiceRepository.getInstance(getApplication()).getAll(),
-            mSearchQuery
-        )
-    ) { pair ->
+    val services = Transformations.switchMap(mSearchQuery) { query ->
+        return@switchMap mServices.filter(query).toLiveData(SIZE_PAGE_LIST_DEFAULT)
+    }
 
-        val services = pair.first
-        val query = pair.second
-
-        if (query.isNullOrEmpty()) {
-            return@map services
-        } else {
-            return@map services?.filter {
-                it.name.lowercase().contains(query.lowercase()) ||
-                        it.identifier.lowercase().contains(query.lowercase()) ||
-                        it.type.lowercase().contains(query.lowercase())
+    private fun DataSource.Factory<Int, Service>.filter(query: String): DataSource.Factory<Int, Service> {
+        return this.mapByPage { services ->
+            if (query.isEmpty()) {
+                return@mapByPage services
+            } else {
+                return@mapByPage services.filter {
+                    it.name.lowercase().contains(query.lowercase()) ||
+                            it.identifier.lowercase().contains(query.lowercase()) ||
+                            it.type.lowercase().contains(query.lowercase())
+                }
             }
         }
     }

@@ -61,6 +61,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$android_room_version"
     implementation "androidx.room:room-rxjava2:$android_room_version"
 
+    implementation "androidx.paging:paging-runtime-ktx:$android_paging_version"
 
     // 3rd Party Dependencies
     implementation "com.squareup.retrofit2:retrofit:$external_retrofit_version"

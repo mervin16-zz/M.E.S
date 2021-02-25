@@ -1,6 +1,7 @@
 package com.th3pl4gu3.mes.database
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,11 +18,8 @@ interface ServiceDao {
     suspend fun insertAll(services: List<Service>)
 
     @Query("SELECT * FROM service_table")
-    fun getAll(): LiveData<List<Service>>
+    fun getAll(): DataSource.Factory<Int, Service>
 
     @Query("SELECT * FROM service_table WHERE type = 'E'")
     fun getEmergencies(): LiveData<List<Service>>
-
-    @Query("SELECT COUNT(DISTINCT identifier) from service_table")
-    suspend fun count(): Int
 }

@@ -33,8 +33,6 @@ class ServiceRepository private constructor(application: Application) {
 
     fun getEmergencies() = serviceDao.getEmergencies()
 
-    suspend fun hasData(): Boolean = serviceDao.count() > 0
-
     suspend fun refresh(): String? {
         var message: String? = null
 

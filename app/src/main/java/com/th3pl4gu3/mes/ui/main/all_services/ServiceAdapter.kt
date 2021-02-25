@@ -3,13 +3,14 @@ package com.th3pl4gu3.mes.ui.main.all_services
 
 import com.th3pl4gu3.mes.api.Service
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.th3pl4gu3.mes.ui.utils.listeners.PhoneNumberListener
 
 class ServiceAdapter(
     private val phoneNumberListener: PhoneNumberListener
-) : ListAdapter<Service, ServiceViewHolder>(
+) : PagedListAdapter<Service, ServiceViewHolder>(
     diffCallback
 ) {
     companion object {

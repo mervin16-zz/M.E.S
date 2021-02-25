@@ -10,7 +10,11 @@
     -->
     <action
         android:id="@+id/action_global_Fragment_PreCall"
-        app:destination="@id/Fragment_PreCall" />
+        app:destination="@id/Fragment_PreCall"
+        app:enterAnim="@anim/anim_slide_in_right"
+        app:exitAnim="@anim/anim_slide_out_left"
+        app:popEnterAnim="@anim/anim_slide_in_left"
+        app:popExitAnim="@anim/anim_slide_out_right" />
 
 
     <!--
