@@ -34,6 +34,24 @@
     <string name="title_precall_title">Emergency %1$s</string>
     <string name="title_precall_subtitle">Don\'t panic. Starting a call to %1$s for you</string>
 
+
+    <string name="title_service_suggestions">Please provide services applicable in Mauritius Only</string>
+    <string name="subtitle_service_suggestions">
+        Providing a proof will be more easy for us to validate it as a service and provide it quicker on the application
+    </string>
+
+    <string name="subtitle_bug_report">
+        Please provide as much details as possible in the steps for us to be able to understand the bug
+    </string>
+
+    <!-- Fields Text & Hints -->
+    <string name="hint_field_service_name">Service Name</string>
+    <string name="hint_field_service_number">Service Number</string>
+    <string name="hint_field_service_proof">Proof of service (A link, or a reference of the Service)</string>
+
+    <string name="hint_field_bug_issue">Bug Identified</string>
+    <string name="hint_field_bug_steps">Steps to reproduce issue</string>
+
     <!-- Actions -->
     <string name="action_retry">Retry</string>
     <string name="action_allow">Allow</string>
@@ -41,6 +59,7 @@
     <string name="action_search">Search</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_ask_me_later">Ask Me Later</string>
+    <string name="action_submit">Submit</string>
 
     <!-- Settings -->
     <string name="settings_key_category_display" translatable="false">settings_key_category_display</string>

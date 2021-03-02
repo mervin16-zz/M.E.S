@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.th3pl4gu3.mes.R
+import com.th3pl4gu3.mes.ui.utils.extensions.navigateTo
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -32,14 +34,31 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Preferences Listeners
         appThemePreference()
+
+        bugReportPreference()
+
+        serviceSuggestionPreference()
     }
 
     // Preferences
     private fun appThemePreference() {
         findPreference<ListPreference>(getString(R.string.settings_key_display_theme))?.setOnPreferenceChangeListener { preference, newValue ->
             viewModel.updateAppTheme(preference.key, newValue as String)
+            true
+        }
+    }
+
+    private fun bugReportPreference() {
+        findPreference<Preference>(getString(R.string.settings_key_help_feedback))?.setOnPreferenceClickListener {
+            navigateTo(SettingsFragmentDirections.actionFragmentSettingsToFragmentBugReport())
+            true
+        }
+    }
+
+    private fun serviceSuggestionPreference() {
+        findPreference<Preference>(getString(R.string.settings_key_help_add_services))?.setOnPreferenceClickListener {
+            navigateTo(SettingsFragmentDirections.actionFragmentSettingsToFragmentServiceSuggestion())
             true
         }
     }

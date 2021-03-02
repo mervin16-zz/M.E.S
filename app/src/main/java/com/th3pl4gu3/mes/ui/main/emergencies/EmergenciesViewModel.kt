@@ -31,15 +31,20 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
     val emergencies: LiveData<List<Service>> = Transformations.map(
         ServiceRepository.getInstance(getApplication()).getEmergencies()
     ) { services ->
-        // Assign the police direct line 1 service as emergency button
-        mEmergencyButtonHolder = services.first {
-            it.identifier == ID_API_SERVICE_POLICE
+
+        if (!services.isNullOrEmpty()) {
+            // Assign the police direct line 1 service as emergency button
+            mEmergencyButtonHolder = services.first {
+                it.identifier == ID_API_SERVICE_POLICE
+            }
+
+            // Remove the emergency button service from other emergencies list
+            return@map ArrayList(services).apply {
+                this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
+            }
         }
 
-        // Remove the emergency button service from other emergencies list
-        return@map ArrayList(services).apply {
-            this.removeIf { it.identifier == ID_API_SERVICE_POLICE }
-        }
+        return@map null
     }
 
     init {
