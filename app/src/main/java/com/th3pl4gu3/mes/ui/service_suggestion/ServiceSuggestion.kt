@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentSuggestServiceBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.hasSuccessor
+import com.th3pl4gu3.mes.ui.utils.extensions.join
 import com.th3pl4gu3.mes.ui.utils.extensions.requireMailIntent
 
 class ServiceSuggestion : Fragment() {
@@ -35,29 +37,31 @@ class ServiceSuggestion : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        subscribeListeners()
+        subscribeObservers()
     }
 
-    private fun subscribeListeners() {
-        // Submit button
-        binding.ButtonSubmit.setOnClickListener {
-            // TODO("Check for data validity")
-
-            val emailConstruct = constructEmail()
-            val intent = requireMailIntent(emailConstruct.first, emailConstruct.second)
-            if (intent.hasSuccessor(requireContext())) {
-                startActivity(intent)
-            } else {
-                // TODO("Show a prompt")
-                Log.v("INTENT_TEST", "No app found")
+    private fun subscribeObservers() {
+        viewModel.formValid.observe(viewLifecycleOwner, {
+            if (it) {
+                val emailConstruct = constructEmail()
+                val intent = requireMailIntent(emailConstruct.first, emailConstruct.second)
+                if (intent.hasSuccessor(requireContext())) {
+                    startActivity(intent)
+                } else {
+                    // TODO("Show a prompt")
+                    Log.v("INTENT_TEST", "No app found")
+                }
             }
-        }
+        })
     }
 
     private fun constructEmail(): Pair<String, String> {
-        val subject =
-            "MES :: Service Suggestion :: ${viewModel.serviceName} :: ${viewModel.serviceNumber}"
-        val message = "Below are the links for the service's proofs \n \n ${viewModel.serviceProof}"
+        val subject = String.format(
+            getString(R.string.email_subject_service_suggestion),
+            viewModel.serviceName,
+            viewModel.serviceNumber
+        )
+        val message = getString(R.string.email_body_service_suggestion).join(viewModel.serviceProof)
 
         return Pair(subject, message)
     }

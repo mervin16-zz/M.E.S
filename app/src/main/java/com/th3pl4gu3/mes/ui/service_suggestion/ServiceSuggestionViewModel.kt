@@ -2,6 +2,8 @@ package com.th3pl4gu3.mes.ui.service_suggestion
 
 import android.app.Application
 import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.th3pl4gu3.mes.BR
 import com.th3pl4gu3.mes.ui.utils.helpers.ObservableViewModel
 
@@ -12,6 +14,8 @@ class ServiceSuggestionViewModel(application: Application) : ObservableViewModel
     private var mServiceNumber: String = ""
     private var mServiceProof: String = ""
 
+    private var mFormSubmitted = MutableLiveData(false)
+    private var mFormValid = MutableLiveData(false)
 
     // Bind-able two-way binding
     var serviceName: String
@@ -40,4 +44,23 @@ class ServiceSuggestionViewModel(application: Application) : ObservableViewModel
             mServiceProof = value
             notifyPropertyChanged(BR.serviceProof)
         }
+
+    // Live Data
+    val formSubmitted: LiveData<Boolean>
+        get() = mFormSubmitted
+
+    val formValid: LiveData<Boolean>
+        get() = mFormValid
+
+
+    // Functions
+    fun submit() {
+        // Flag for error message check in each field
+        mFormSubmitted.value = true
+
+        // Check if data submitted is valid
+        mFormValid.value = !hasEmptyFields()
+    }
+
+    private fun hasEmptyFields() = mServiceName.isEmpty() || mServiceNumber.isEmpty()
 }

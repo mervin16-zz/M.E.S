@@ -7,7 +7,7 @@ import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.database.ServiceRepository
 import com.th3pl4gu3.mes.ui.utils.helpers.Global
 import com.th3pl4gu3.mes.ui.utils.helpers.Global.ID_API_SERVICE_POLICE
-import com.th3pl4gu3.mes.ui.utils.extensions.getString
+import com.th3pl4gu3.mes.ui.utils.extensions.requireStringRes
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -64,10 +64,10 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
                 if (Global.isNetworkConnected) {
                     ServiceRepository.getInstance(getApplication()).refresh()
                 } else {
-                    mMessage.value = getString(R.string.message_info_no_internet)
+                    mMessage.value = requireStringRes(R.string.message_info_no_internet)
                 }
             } catch (e: Exception) {
-                mMessage.value = getString(R.string.message_error_bug_report)
+                mMessage.value = requireStringRes(R.string.message_error_bug_report)
             }
 
         }

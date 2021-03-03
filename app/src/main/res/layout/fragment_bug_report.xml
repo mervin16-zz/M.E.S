@@ -30,11 +30,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/Field_Service_Name"
+            isRequired="@{ViewModel.formSubmitted}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:hint="@string/hint_field_bug_issue"
             app:endIconMode="clear_text"
+            app:helperText="@string/message_info_field_required"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Title_Bug_Note">
@@ -49,10 +51,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/Field_Steps"
+            isRequired="@{ViewModel.formSubmitted}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/hint_field_bug_steps"
+            app:helperText="@string/message_info_field_required"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Field_Service_Name">
@@ -75,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:onClick="@{ () -> ViewModel.submit()}"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/action_submit"

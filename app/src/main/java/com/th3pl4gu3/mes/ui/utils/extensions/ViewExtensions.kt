@@ -3,7 +3,9 @@ package com.th3pl4gu3.mes.ui.utils.extensions
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
@@ -50,3 +52,8 @@ inline fun View.snackInf(
 fun Snackbar.action(action: String, listener: (View) -> Unit) {
     setAction(action, listener)
 }
+
+/*
+* Use resources within ViewGroups
+*/
+fun ViewGroup.requireStringRes(@StringRes id: Int): String = resources.getString(id)

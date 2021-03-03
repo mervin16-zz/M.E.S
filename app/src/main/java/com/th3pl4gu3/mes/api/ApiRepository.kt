@@ -1,5 +1,7 @@
 package com.th3pl4gu3.mes.api
 
+import java.util.*
+
 /*
 * Repository pattern for API requests
 */
@@ -20,7 +22,11 @@ class ApiRepository private constructor() {
             }
     }
 
-    suspend fun getServices() = apiService.getServices(API_ORDER_TYPE)
-
-    suspend fun getEmergencies() = apiService.getEmergencies(API_ORDER_TYPE)
+    suspend fun getServices() = when (Locale.getDefault()) {
+        Locale.ENGLISH -> apiService.getServicesEn(API_ORDER_TYPE)
+        Locale.FRENCH, Locale.FRANCE, Locale.CANADA_FRENCH -> apiService.getServicesFr(
+            API_ORDER_TYPE
+        )
+        else -> apiService.getServicesEn(API_ORDER_TYPE)
+    }
 }

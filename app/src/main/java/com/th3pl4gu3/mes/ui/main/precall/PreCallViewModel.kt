@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.Service
-import com.th3pl4gu3.mes.ui.utils.extensions.getString
+import com.th3pl4gu3.mes.ui.utils.extensions.requireStringRes
 import com.th3pl4gu3.mes.ui.utils.extensions.join
 
 class PreCallViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,15 +19,15 @@ class PreCallViewModel(application: Application) : AndroidViewModel(application)
         private set
 
     val tick: LiveData<String> = Transformations.map(mTick) {
-        getString(R.string.styling_seconds_s).join(it)
+        requireStringRes(R.string.styling_seconds_s).join(it)
     }
 
     val number: LiveData<String> = Transformations.map(mService) {
-        getString(R.string.title_precall_subtitle).join(it.number.toString())
+        requireStringRes(R.string.title_precall_subtitle).join(it.number.toString())
     }
 
     val name: LiveData<String> = Transformations.map(mService) {
-        getString(R.string.title_precall_title).join(it.name)
+        requireStringRes(R.string.title_precall_title).join(it.name)
     }
 
     fun tick(second: Long) {

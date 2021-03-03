@@ -108,8 +108,11 @@
     <!-- Messages -->
     <string name="message_info_no_internet">You need to be connected to the internet for the first time to fetch the services.</string>
     <string name="message_info_permission_denied">Permission has been denied</string>
+    <string name="message_info_field_required">* This field is required</string>
 
     <string name="message_error_bug_report">An error occurred while fetching the data. Please report a bug issue in Settings</string>
+
+    <string name="message_error_field_empty">This field cannot be empty</string>
 
 
     <!-- Styling -->
@@ -122,4 +125,12 @@
     <string name="icd_arrow_logo">An arrow logo pointing to the service\'s logo</string>
 
     <string name="icd_close_call_countdown">A round button to stop the call countdown</string>
+
+
+    <!-- Email Literals -->
+    <string name="email_subject_bug_report">MES :: Bug Report :: %1$s</string>
+    <string name="email_body_bug_report">Below are the steps to reproduce issue: \n \n %1$s</string>
+
+    <string name="email_subject_service_suggestion">MES :: Service Suggestion :: %1$s :: %2$s</string>
+    <string name="email_body_service_suggestion">Below are the links for the service\'s proofs: \n \n %1$s</string>
 </resources>

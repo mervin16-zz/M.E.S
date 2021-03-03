@@ -9,9 +9,8 @@ import com.th3pl4gu3.mes.BR
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.database.ServiceRepository
-import com.th3pl4gu3.mes.ui.utils.helpers.DoubleTrigger
 import com.th3pl4gu3.mes.ui.utils.helpers.Global
-import com.th3pl4gu3.mes.ui.utils.extensions.getString
+import com.th3pl4gu3.mes.ui.utils.extensions.requireStringRes
 import com.th3pl4gu3.mes.ui.utils.extensions.lowercase
 import com.th3pl4gu3.mes.ui.utils.helpers.Global.SIZE_PAGE_LIST_DEFAULT
 import com.th3pl4gu3.mes.ui.utils.helpers.ObservableViewModel
@@ -80,11 +79,11 @@ class AllServicesViewModel(application: Application) : ObservableViewModel(appli
                 if (Global.isNetworkConnected) {
                     ServiceRepository.getInstance(getApplication()).refresh()
                 } else {
-                    mMessage.value = getString(R.string.message_info_no_internet)
+                    mMessage.value = requireStringRes(R.string.message_info_no_internet)
                 }
 
             } catch (e: Exception) {
-                mMessage.value = getString(R.string.message_error_bug_report)
+                mMessage.value = requireStringRes(R.string.message_error_bug_report)
             }
 
         }

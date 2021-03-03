@@ -15,8 +15,8 @@ private const val API_BASE_URL = "https://mes.th3pl4gu3.com/"
 private const val API_VERSION = "v0.2"
 private const val API_QUERY_ORDER = "order"
 
-private const val API_PATH_SERVICES = "/${API_VERSION}/en/services?"
-private const val API_PATH_EMERGENCIES = "/${API_VERSION}/en/services/emergencies?"
+private const val API_PATH_SERVICES_EN = "/${API_VERSION}/en/services?"
+private const val API_PATH_SERVICES_FR = "/${API_VERSION}/fr/services?"
 
 internal const val API_ORDER_TYPE = "asc"
 
@@ -31,11 +31,11 @@ private val retrofitService = Retrofit.Builder()
     .build()
 
 interface ApiService {
-    @GET(API_PATH_SERVICES)
-    suspend fun getServices(@Query(API_QUERY_ORDER) order: String): Response
+    @GET(API_PATH_SERVICES_EN)
+    suspend fun getServicesEn(@Query(API_QUERY_ORDER) order: String): Response
 
-    @GET(API_PATH_EMERGENCIES)
-    suspend fun getEmergencies(@Query(API_QUERY_ORDER) order: String): Response
+    @GET(API_PATH_SERVICES_FR)
+    suspend fun getServicesFr(@Query(API_QUERY_ORDER) order: String): Response
 }
 
 object RetrofitManager {
