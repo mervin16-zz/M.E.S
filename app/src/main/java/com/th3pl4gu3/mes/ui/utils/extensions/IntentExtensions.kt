@@ -43,6 +43,14 @@ fun requireMailIntent(subject: String, body: String) = Intent(Intent.ACTION_SEND
     putExtra(Intent.EXTRA_TEXT, body)
 }
 
+// Returns a Share Intent
+fun requireShareIntent(content: String) = Intent().apply {
+    action = Intent.ACTION_SEND
+    putExtra(Intent.EXTRA_TEXT, content)
+    type = "text/plain"
+
+    return Intent.createChooser(this, null)
+}
 
 /**
  *  Checks whether the intent has an app that can

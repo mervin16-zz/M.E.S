@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 android {
@@ -75,6 +76,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:$external_lottie_version"
 
     implementation "com.google.code.gson:gson:$external_gson_version"
+
+    implementation "com.google.android.gms:play-services-oss-licenses:$external_oss_licences_version"
 
     // Testing Framework Dependencies
     testImplementation "org.junit.jupiter:junit-jupiter:$testing_junit"

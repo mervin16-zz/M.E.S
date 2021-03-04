@@ -59,12 +59,22 @@ class EmergenciesViewModel(application: Application) : AndroidViewModel(applicat
 
             // Reset previous Message value
             mMessage.value = null
+            val serviceRepo = ServiceRepository.getInstance(getApplication())
+            val hasCache = serviceRepo.hasCache()
 
             try {
                 if (Global.isNetworkConnected) {
-                    ServiceRepository.getInstance(getApplication()).refresh()
+                    with(serviceRepo.refresh()) {
+                        if (!hasCache) {
+                            mMessage.value = this
+                        }
+                    }
                 } else {
-                    mMessage.value = requireStringRes(R.string.message_info_no_internet)
+                    // If not connected to internet, we check if cache present already
+                    // If not, display error message
+                    if (!hasCache) {
+                        mMessage.value = requireStringRes(R.string.message_info_no_internet)
+                    }
                 }
             } catch (e: Exception) {
                 mMessage.value = requireStringRes(R.string.message_error_bug_report)

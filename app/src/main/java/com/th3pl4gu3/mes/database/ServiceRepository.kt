@@ -27,11 +27,11 @@ class ServiceRepository private constructor(application: Application) {
             }
     }
 
-    private suspend fun insertAll(services: List<Service>) = serviceDao.insertAll(services)
-
     fun getAll() = serviceDao.getAll()
 
     fun getEmergencies() = serviceDao.getEmergencies()
+
+    suspend fun hasCache() = serviceDao.count() > 0
 
     suspend fun refresh(): String? {
         var message: String? = null
@@ -39,7 +39,7 @@ class ServiceRepository private constructor(application: Application) {
         withContext(Dispatchers.IO) {
             val response = ApiRepository.getInstance().getServices()
             if (response.success) {
-                insertAll(response.services)
+                serviceDao.refresh(response.services)
             } else {
                 message = response.message
             }

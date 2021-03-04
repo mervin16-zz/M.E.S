@@ -63,6 +63,9 @@
             app:exitAnim="@anim/anim_slide_out_left"
             app:popEnterAnim="@anim/anim_slide_in_left"
             app:popExitAnim="@anim/anim_slide_out_right" />
+        <action
+            android:id="@+id/action_Fragment_About_to_Activity_License_Oss"
+            app:destination="@id/Activity_License_Oss" />
     </fragment>
 
     <fragment
@@ -100,8 +103,8 @@
             app:argType="com.th3pl4gu3.mes.api.Service" />
     </fragment>
 
-    <!-- Bug Report & Service Suggestions -->
 
+    <!-- Bug Report & Service Suggestions -->
     <fragment
         android:id="@+id/Fragment_Bug_Report"
         android:name="com.th3pl4gu3.mes.ui.bug_report.BugReport"
@@ -113,5 +116,12 @@
         android:name="com.th3pl4gu3.mes.ui.service_suggestion.ServiceSuggestion"
         android:label="Service Suggestions"
         tools:layout="@layout/fragment_suggest_service" />
+
+
+    <!-- OSS Licence Activity -->
+    <activity
+        android:id="@+id/Activity_License_Oss"
+        android:label="Licences"
+        android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
 
 </navigation>

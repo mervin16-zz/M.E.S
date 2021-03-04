@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.th3pl4gu3.mes.databinding.FragmentAboutBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.navigateTo
+import com.th3pl4gu3.mes.ui.utils.extensions.requireShareIntent
 import com.th3pl4gu3.mes.ui.utils.listeners.AboutItemListener
 
 class AboutFragment : Fragment(), AboutItemListener {
@@ -44,12 +45,15 @@ class AboutFragment : Fragment(), AboutItemListener {
     }
 
     override fun onItemClick(item: AboutItem.Item) {
-
         when (item) {
 
             AboutItem.Item.DEV_REPORT_BUG -> navigateTo(AboutFragmentDirections.actionFragmentAboutToFragmentBugReport())
 
             AboutItem.Item.DEV_SUGGESTION -> navigateTo(AboutFragmentDirections.actionFragmentAboutToFragmentServiceSuggestion())
+
+            AboutItem.Item.OTHER_LICENSES -> navigateTo(AboutFragmentDirections.actionFragmentAboutToActivityLicenseOss())
+
+            AboutItem.Item.DEV_SHARE -> startActivity(requireShareIntent("Please find MES on www.mes.com"))
 
             else -> Log.v("ABOUT_US_CLICKS", "${item.name} has been clicked")
         }
@@ -73,26 +77,4 @@ class AboutFragment : Fragment(), AboutItemListener {
             }
         }
     }
-//
-//    private fun subscribeDevelopmentList() {
-//        val adapter = AboutItemAdapter(this)
-//
-//        binding.includeAboutDevelopment.RecyclerViewDevelopment.apply {
-//            this.adapter = adapter
-//            setHasFixedSize(true)
-//        }
-//
-//        adapter.submitList(viewModel.getDevelopmentList())
-//    }
-//
-//    private fun subscribeOthersList() {
-//        val adapter = AboutItemAdapter(this)
-//
-//        binding.includeAboutOthers.RecyclerViewOther.apply {
-//            this.adapter = adapter
-//            setHasFixedSize(true)
-//        }
-//
-//        adapter.submitList(viewModel.getOtherList())
-//    }
 }
