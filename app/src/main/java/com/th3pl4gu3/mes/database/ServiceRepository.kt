@@ -31,6 +31,8 @@ class ServiceRepository private constructor(application: Application) {
 
     fun getEmergencies() = serviceDao.getEmergencies()
 
+    fun search(search: String) = serviceDao.search(search)
+
     suspend fun hasCache() = serviceDao.count() > 0
 
     suspend fun refresh(): String? {

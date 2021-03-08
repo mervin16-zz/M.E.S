@@ -23,6 +23,9 @@ interface ServiceDao {
     @Query("SELECT * FROM service_table WHERE type = 'E'")
     fun getEmergencies(): LiveData<List<Service>>
 
+    @Query("SELECT * FROM service_table WHERE name LIKE :search OR type LIKE :search OR number LIKE :search")
+    fun search(search: String): DataSource.Factory<Int, Service>
+
     @Query("SELECT COUNT(identifier) from service_table")
     suspend fun count(): Int
 

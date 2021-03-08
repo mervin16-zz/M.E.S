@@ -26,9 +26,9 @@
             android:id="@+id/RecyclerView_Services"
             motion:visibilityMode="ignore" />
 
-        <Constraint
-            android:id="@+id/Illus_Error"
-            motion:visibilityMode="ignore" />
+        <Constraint android:id="@+id/Animation_Loading">
+            <PropertySet motion:visibilityMode="ignore" />
+        </Constraint>
 
     </ConstraintSet>
 
@@ -39,15 +39,17 @@
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toTopOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:visibilityMode="ignore" />
 
         <ConstraintOverride
             android:id="@+id/RecyclerView_Services"
             motion:visibilityMode="ignore" />
 
-        <Constraint
-            android:id="@+id/Illus_Error"
-            motion:visibilityMode="ignore" />
+        <Constraint android:id="@+id/Animation_Loading">
+            <PropertySet motion:visibilityMode="ignore" />
+        </Constraint>
+
     </ConstraintSet>
 
 </MotionScene>

@@ -1,15 +1,16 @@
 package com.th3pl4gu3.mes.ui.about
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentAboutBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.navigateTo
-import com.th3pl4gu3.mes.ui.utils.extensions.requireShareIntent
+import com.th3pl4gu3.mes.ui.utils.extensions.toBrowserIntent
+import com.th3pl4gu3.mes.ui.utils.extensions.toShareIntent
 import com.th3pl4gu3.mes.ui.utils.listeners.AboutItemListener
 
 class AboutFragment : Fragment(), AboutItemListener {
@@ -51,11 +52,19 @@ class AboutFragment : Fragment(), AboutItemListener {
 
             AboutItem.Item.DEV_SUGGESTION -> navigateTo(AboutFragmentDirections.actionFragmentAboutToFragmentServiceSuggestion())
 
+            AboutItem.Item.DEV_SHARE -> startActivity(getString(R.string.app_share_content).toShareIntent)
+
+            AboutItem.Item.DEV_RATE_US -> startActivity(getString(R.string.app_url_playstore).toBrowserIntent)
+
+            AboutItem.Item.OTHER_POLICY -> startActivity(getString(R.string.app_website_privacy).toBrowserIntent)
+
+            AboutItem.Item.OTHER_DEVELOPER -> startActivity(getString(R.string.app_website_developer).toBrowserIntent)
+
             AboutItem.Item.OTHER_LICENSES -> navigateTo(AboutFragmentDirections.actionFragmentAboutToActivityLicenseOss())
 
-            AboutItem.Item.DEV_SHARE -> startActivity(requireShareIntent("Please find MES on www.mes.com"))
+            else -> {
+            }
 
-            else -> Log.v("ABOUT_US_CLICKS", "${item.name} has been clicked")
         }
     }
 

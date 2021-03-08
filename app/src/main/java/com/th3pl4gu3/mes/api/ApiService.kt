@@ -15,8 +15,8 @@ private const val API_BASE_URL = "https://mes.th3pl4gu3.com/"
 private const val API_VERSION = "v0.2"
 private const val API_QUERY_ORDER = "order"
 
-private const val API_PATH_SERVICES_EN = "/${API_VERSION}/en/services?"
-private const val API_PATH_SERVICES_FR = "/${API_VERSION}/fr/services?"
+private const val API_PATH_SERVICES_EN = "/api/${API_VERSION}/en/services?"
+private const val API_PATH_SERVICES_FR = "/api/${API_VERSION}/fr/services?"
 
 internal const val API_ORDER_TYPE = "asc"
 

@@ -4,6 +4,13 @@
     <string name="app_name">MES</string>
     <string name="app_name_long">Mauritius Emergency Services</string>
 
+    <string name="app_website_developer" translatable="false">https://mes.th3pl4gu3.com/web#developer</string>
+    <string name="app_website_privacy" translatable="false">https://mes.th3pl4gu3.com/web/privacy</string>
+    <string name="app_url_playstore" translatable="false">https://play.google.com/store/apps/dev?id=5236150593519379806</string>
+
+    <string name="app_share_content">Please find MES on www.mes.com</string>
+
+    <string name="app_support_email" translatable="false">th3pl4gu33@gmail.com</string>
 
     <!-- Menu Items -->
     <string name="menu_drawer_emergencies">Emergencies</string>
@@ -44,6 +51,11 @@
         Please provide as much details as possible in the steps for us to be able to understand the bug
     </string>
 
+    <string name="title_unable_open_app_email">Unable to Open Email App</string>
+    <string name="message_unable_open_app_email">
+        There are no application installed to process this request. Please consider installing  an email application to continue
+    </string>
+
     <!-- Fields Text & Hints -->
     <string name="hint_field_service_name">Service Name</string>
     <string name="hint_field_service_number">Service Number</string>
@@ -60,6 +72,7 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_ask_me_later">Ask Me Later</string>
     <string name="action_submit">Submit</string>
+    <string name="action_ok">OK</string>
 
     <!-- Settings -->
     <string name="settings_key_category_display" translatable="false">settings_key_category_display</string>

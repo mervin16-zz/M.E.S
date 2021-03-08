@@ -24,7 +24,6 @@ class AllServicesViewModel(application: Application) : ObservableViewModel(appli
     private val mMessage = MutableLiveData<String>()
     private val mLoading = MutableLiveData(false)
     private var mSearchQuery = MutableLiveData("")
-    private var mServices = ServiceRepository.getInstance(getApplication()).getAll()
 
     // Properties
     val message: LiveData<String>
@@ -34,21 +33,11 @@ class AllServicesViewModel(application: Application) : ObservableViewModel(appli
         get() = mLoading
 
     val services = Transformations.switchMap(mSearchQuery) { query ->
-        return@switchMap mServices.filter(query).toLiveData(SIZE_PAGE_LIST_DEFAULT)
-    }
-
-    private fun DataSource.Factory<Int, Service>.filter(query: String): DataSource.Factory<Int, Service> {
-        return this.mapByPage { services ->
-            if (query.isEmpty()) {
-                return@mapByPage services
-            } else {
-                return@mapByPage services.filter {
-                    it.name.lowercase().contains(query.lowercase()) ||
-                            it.identifier.lowercase().contains(query.lowercase()) ||
-                            it.type.lowercase().contains(query.lowercase())
-                }
-            }
-        }
+        return@switchMap if (query.isEmpty()) {
+            ServiceRepository.getInstance(getApplication()).getAll()
+        } else {
+            ServiceRepository.getInstance(getApplication()).search("%${query}%")
+        }.toLiveData(SIZE_PAGE_LIST_DEFAULT)
     }
 
     // Bind-able two-way binding

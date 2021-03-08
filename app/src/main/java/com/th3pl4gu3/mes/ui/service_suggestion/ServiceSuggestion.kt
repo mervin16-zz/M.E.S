@@ -1,12 +1,12 @@
 package com.th3pl4gu3.mes.ui.service_suggestion
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentSuggestServiceBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.hasSuccessor
@@ -44,12 +44,12 @@ class ServiceSuggestion : Fragment() {
         viewModel.formValid.observe(viewLifecycleOwner, {
             if (it) {
                 val emailConstruct = constructEmail()
-                val intent = requireMailIntent(emailConstruct.first, emailConstruct.second)
+                val intent =
+                    requireContext().requireMailIntent(emailConstruct.first, emailConstruct.second)
                 if (intent.hasSuccessor(requireContext())) {
                     startActivity(intent)
                 } else {
-                    // TODO("Show a prompt")
-                    Log.v("INTENT_TEST", "No app found")
+                    alertDialogNoEmailApp()
                 }
             }
         })
@@ -64,5 +64,16 @@ class ServiceSuggestion : Fragment() {
         val message = getString(R.string.email_body_service_suggestion).join(viewModel.serviceProof)
 
         return Pair(subject, message)
+    }
+
+    // Alert Dialog Boxes
+    private fun alertDialogNoEmailApp() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.title_unable_open_app_email))
+            .setMessage(getString(R.string.message_unable_open_app_email))
+            .setPositiveButton(getString(R.string.action_ok)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }
