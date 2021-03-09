@@ -1,6 +1,7 @@
 package com.th3pl4gu3.mes.ui.main.emergencies
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.th3pl4gu3.mes.R
 import com.th3pl4gu3.mes.databinding.FragmentEmergenciesBinding
 import com.th3pl4gu3.mes.ui.utils.extensions.action
 import com.th3pl4gu3.mes.ui.utils.extensions.requireMesActivity
+import com.th3pl4gu3.mes.ui.utils.extensions.snack
 import com.th3pl4gu3.mes.ui.utils.extensions.snackInf
 
 class EmergenciesFragment : Fragment() {
@@ -63,6 +65,10 @@ class EmergenciesFragment : Fragment() {
 
             true
         }
+
+        binding.EmergencyButton.setOnClickListener {
+            viewModel.emergencyButtonClick()
+        }
     }
 
     private fun subscribeEmergencies() {
@@ -95,6 +101,7 @@ class EmergenciesFragment : Fragment() {
     }
 
     private fun subscribeObservers() {
+        // Observes error messages
         viewModel.message.observe(viewLifecycleOwner, { error ->
             if (error != null) {
                 binding.RootEmergencies.snackInf(error) {
@@ -102,6 +109,15 @@ class EmergenciesFragment : Fragment() {
                         viewModel.refreshServices()
                     }
                 }
+            }
+        })
+
+        // Observes unsuccessful clicks
+        viewModel.unsuccessfulClicks.observe(viewLifecycleOwner, { clicks ->
+            if (clicks > 2) {
+                binding.RootEmergencies.snack(getString(R.string.message_info_hold_emergency_button)) {}
+
+                viewModel.resetEmergencyButtonClicks()
             }
         })
     }

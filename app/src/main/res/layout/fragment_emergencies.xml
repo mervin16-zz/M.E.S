@@ -83,11 +83,11 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
+                android:contentDescription="@string/icd_error_services_unavailable"
                 android:scaleType="centerCrop"
                 android:src="@drawable/il_error"
-                tools:src="@drawable/il_error"
                 android:visibility="@{ViewModel.message != null ? View.VISIBLE : View.GONE}"
-                android:contentDescription="@string/icd_error_services_unavailable" />
+                tools:src="@drawable/il_error" />
 
             <TextView
                 android:id="@+id/Emergency_Other_Title"
@@ -138,11 +138,11 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="80dp"
                 android:layout_marginBottom="80dp"
+                android:contentDescription="@string/icd_error_services_unavailable"
                 android:scaleType="centerCrop"
                 android:src="@drawable/il_error"
-                tools:src="@drawable/il_error"
-                android:contentDescription="@string/icd_error_services_unavailable"
-                android:visibility="@{ViewModel.message != null ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{ViewModel.message != null ? View.VISIBLE : View.GONE}"
+                tools:src="@drawable/il_error" />
 
         </LinearLayout>
 

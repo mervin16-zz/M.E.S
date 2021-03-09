@@ -127,6 +127,10 @@
 
     <string name="message_error_field_empty">This field cannot be empty</string>
 
+    <string name="message_info_hold_emergency_button">
+        You need to hold the big emergency button to perform an emergency call
+    </string>
+
 
     <!-- Styling -->
     <string name="styling_seconds_s">%1$ss</string>

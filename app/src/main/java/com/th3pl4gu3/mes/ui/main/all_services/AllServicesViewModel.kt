@@ -3,15 +3,12 @@ package com.th3pl4gu3.mes.ui.main.all_services
 import android.app.Application
 import androidx.databinding.Bindable
 import androidx.lifecycle.*
-import androidx.paging.DataSource
 import androidx.paging.toLiveData
 import com.th3pl4gu3.mes.BR
 import com.th3pl4gu3.mes.R
-import com.th3pl4gu3.mes.api.Service
 import com.th3pl4gu3.mes.database.ServiceRepository
 import com.th3pl4gu3.mes.ui.utils.helpers.Global
 import com.th3pl4gu3.mes.ui.utils.extensions.requireStringRes
-import com.th3pl4gu3.mes.ui.utils.extensions.lowercase
 import com.th3pl4gu3.mes.ui.utils.helpers.Global.SIZE_PAGE_LIST_DEFAULT
 import com.th3pl4gu3.mes.ui.utils.helpers.ObservableViewModel
 import kotlinx.coroutines.launch
@@ -33,11 +30,8 @@ class AllServicesViewModel(application: Application) : ObservableViewModel(appli
         get() = mLoading
 
     val services = Transformations.switchMap(mSearchQuery) { query ->
-        return@switchMap if (query.isEmpty()) {
-            ServiceRepository.getInstance(getApplication()).getAll()
-        } else {
-            ServiceRepository.getInstance(getApplication()).search("%${query}%")
-        }.toLiveData(SIZE_PAGE_LIST_DEFAULT)
+        return@switchMap ServiceRepository.getInstance(getApplication()).search("%${query}%")
+            .toLiveData(SIZE_PAGE_LIST_DEFAULT)
     }
 
     // Bind-able two-way binding

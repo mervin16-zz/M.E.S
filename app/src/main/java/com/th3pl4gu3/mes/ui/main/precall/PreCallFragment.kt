@@ -2,7 +2,6 @@ package com.th3pl4gu3.mes.ui.main.precall
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,14 +28,7 @@ class PreCallFragment : Fragment() {
         }
 
         override fun onFinish() {
-
-            Log.d(
-                "PHONE_NUMBER_TEST",
-                "Phone number retrieved: ${viewModel.retrievedService?.number}"
-            )
-
-            //startActivity("8962356413531".toPhoneCallIntent)
-            Log.d("PHONE_NUMBER_TEST", "Call Started")
+            startActivity(viewModel.retrievedService?.number.toString().toPhoneCallIntent)
         }
     }
 
