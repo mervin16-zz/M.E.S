@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:imeOptions="actionNext"
                 android:text="@={ViewModel.serviceName}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -78,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number|phone"
+                android:imeOptions="actionNext"
                 android:text="@={ViewModel.serviceNumber}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,6 +102,7 @@
                 android:lines="8"
                 android:maxLines="10"
                 android:minLines="6"
+                android:imeOptions="actionDone"
                 android:text="@={ViewModel.serviceProof}" />
 
         </com.google.android.material.textfield.TextInputLayout>

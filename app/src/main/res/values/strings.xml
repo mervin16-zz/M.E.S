@@ -1,8 +1,8 @@
 <resources>
 
     <!-- Application Specific -->
-    <string name="app_name">MES</string>
-    <string name="app_name_long">Mauritius Emergency Services</string>
+    <string name="app_name" translatable="false">MES</string>
+    <string name="app_name_long" translatable="false">Mauritius Emergency Services</string>
 
     <string name="app_website_developer" translatable="false">https://mes.th3pl4gu3.com/web#developer</string>
     <string name="app_website_privacy" translatable="false">https://mes.th3pl4gu3.com/web/privacy</string>
@@ -28,33 +28,22 @@
     <string name="subtitle_emergencies_otherAction">Pick another action below</string>
 
     <string name="title_permission_call_info">MES Phone Call Permission</string>
-    <string name="message_permission_call_info">
-        To be able to make phone calls for you, MES needs your permission. Please note that
-        phone calls are not made unless the user does so through the application.
-    </string>
+    <string name="message_permission_call_info">To be able to make phone calls for you, MES needs your permission. Please note that phone calls are not made unless the user does so through the application.</string>
 
     <string name="title_permission_call_explicit">Allow Permissions in Settings</string>
-    <string name="message_permission_call_explicit">
-        To provide us the permission manually to make phone calls, please click Proceed > Permissions > Allow Phone Permissions
-    </string>
+    <string name="message_permission_call_explicit">To provide us the permission manually to make phone calls, please click Proceed > Permissions > Allow Phone Permissions</string>
 
     <string name="title_precall_title">Emergency %1$s</string>
     <string name="title_precall_subtitle">Don\'t panic. Starting a call to %1$s for you</string>
 
 
     <string name="title_service_suggestions">Please provide services applicable in Mauritius Only</string>
-    <string name="subtitle_service_suggestions">
-        Providing a proof will be more easy for us to validate it as a service and provide it quicker on the application
-    </string>
+    <string name="subtitle_service_suggestions">Providing a proof will be more easy for us to validate it as a service and provide it quicker on the application</string>
 
-    <string name="subtitle_bug_report">
-        Please provide as much details as possible in the steps for us to be able to understand the bug
-    </string>
+    <string name="subtitle_bug_report">Please provide as much details as possible in the steps for us to be able to understand the bug</string>
 
     <string name="title_unable_open_app_email">Unable to Open Email App</string>
-    <string name="message_unable_open_app_email">
-        There are no application installed to process this request. Please consider installing  an email application to continue
-    </string>
+    <string name="message_unable_open_app_email">There are no application installed to process this request. Please consider installing  an email application to continue</string>
 
     <!-- Fields Text & Hints -->
     <string name="hint_field_service_name">Service Name</string>
@@ -113,9 +102,9 @@
     <string name="text_title_about_other_license">Open Source Licenses</string>
     <string name="text_title_about_other_terms">Terms &amp; Privacy Policy</string>
     <string name="text_title_about_other_version">Version</string>
-    <string name="text_title_about_other_developer">Developer API</string>
+    <string name="text_title_about_other_developer">Developer</string>
 
-    <string name="text_description_about_other_developer">Application Program Interface (API) used in MES</string>
+    <string name="text_description_about_other_developer">The Developer history of MES</string>
 
 
     <!-- Messages -->
@@ -127,13 +116,11 @@
 
     <string name="message_error_field_empty">This field cannot be empty</string>
 
-    <string name="message_info_hold_emergency_button">
-        You need to hold the big emergency button to perform an emergency call
-    </string>
+    <string name="message_info_hold_emergency_button">You need to hold the big emergency button to perform an emergency call</string>
 
 
     <!-- Styling -->
-    <string name="styling_seconds_s">%1$ss</string>
+    <string name="styling_seconds_s" translatable="false">%1$ss</string>
 
     <!-- Image Content Descriptions -->
     <string name="icd_error_services_unavailable">Error image illustration to represent no services available</string>
