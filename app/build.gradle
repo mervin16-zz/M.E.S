@@ -8,23 +8,36 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release
+    }
     compileSdkVersion rootProject.ext.sdk_compiled_version
     buildToolsVersion rootProject.ext.build_tools
 
     defaultConfig {
-        applicationId rootProject.ext.application_id
+        applicationId application_id
         minSdkVersion rootProject.ext.sdk_minimum_version
         targetSdkVersion rootProject.ext.sdk_compiled_version
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
     }
     buildFeatures {
@@ -39,6 +52,31 @@ android {
         jvmTarget = '1.8'
     }
 
+}
+
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+def props = new Properties()
+def propFile = new File("keystore.properties")
+
+// Check if we can read the file
+if (propFile.canRead()){
+    props.load(new FileInputStream(propFile))
+
+    // Before assigning, we check if key is present
+    if (props!=null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+            props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+        android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+        android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+    } else {
+        println 'signing.properties found but some entries are missing'
+        android.buildTypes.release.signingConfig = null
+    }
+}else {
+    println 'signing.properties not found'
+    android.buildTypes.release.signingConfig = null
 }
 
 dependencies {
